@@ -1,0 +1,2 @@
+class RecordGenresController < ApplicationController
+end
