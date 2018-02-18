@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "/records/:id" => 'records#show'
   post "/records" => 'records#create'
   patch "/records" => 'records#update'
+  delete "/records/:id" => 'records#destroy'
 
   #user record routes
   get "/user_records" => 'user_records#index'
@@ -13,6 +14,20 @@ Rails.application.routes.draw do
 
   #user routes
   post "/users" => 'users#create'
+
+  #artist routes
+  get "/artists" => 'artists#index'
+  get "/artists/:id" => 'artists#show'
+  post "/artists" => 'artists#create'
+  patch "/artists/:id" => 'artists#update'
+  delete "/artists/:id" => 'artists#destroy'
+
+  #genre routes
+  get "/genres" => 'genres#index'
+  get "/genres/:id" => 'genres#show'
+  post "/genres" => 'genres#create'
+  patch "/genres/:id" => 'genres#update'
+  delete "/genres/:id" => 'genres#destroy'
   
 
 end

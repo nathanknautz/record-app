@@ -7,9 +7,10 @@ class UsersController < ApplicationController
                     password_confirmation: params[:password_confirmation]
                     )
     if user.save
-      render json: {message: "user created successfully"}
+      render json: {message: "Account created. Thanks for signing up!"}
     else
       render json: {errors: user.errors.full_messages}, status: :bad_request
+    end
   end
 end
 
