@@ -33,18 +33,31 @@
 
 
 
-Genre.create(name: "Rock")
-Genre.create(name: "Rap")
-Genre.create(name: "Hip-Hop")
-Genre.create(name: "Jazz")
-Genre.create(name: "Blues")
-Genre.create(name: "Country")
-Genre.create(name: "Alternative")
-Genre.create(name: "R & B")
-Genre.create(name: "Acoustic")
-Genre.create(name: "Classical")
-Genre.create(name: "Indie")
-Genre.create(name: "Pop")
+# Genre.create(name: "Rock")
+# Genre.create(name: "Rap")
+# Genre.create(name: "Hip-Hop")
+# Genre.create(name: "Jazz")
+# Genre.create(name: "Blues")
+# Genre.create(name: "Country")
+# Genre.create(name: "Alternative")
+# Genre.create(name: "R & B")
+# Genre.create(name: "Acoustic")
+# Genre.create(name: "Classical")
+# Genre.create(name: "Indie")
+# Genre.create(name: "Pop")
+
+# ArtistRecord.create(artist_id: 1, record_id: 2)
+# ArtistRecord.create(artist_id: 2, record_id: 3)
+# ArtistRecord.create(artist_id: 3, record_id: 4)
+# ArtistRecord.create(artist_id: 4, record_id: 5)
+# RecordGenre.create(record_id: 2, genre_id: 1)
+# RecordGenre.create(record_id: 3, genre_id: 7)
+# RecordGenre.create(record_id: 3, genre_id: 1)
+# RecordGenre.create(record_id: 4, genre_id: 1)
+# RecordGenre.create(record_id: 4, genre_id: 2)
+# RecordGenre.create(record_id: 5, genre_id: 2)
+# RecordGenre.create(record_id: 5, genre_id: 3)
+# RecordGenre.create(record_id: 5, genre_id: 8)
 
 
 

@@ -1,4 +1,5 @@
 class RecordsController < ApplicationController
+  before_action :authenticate_user 
   def index
     @records = Record.all 
     render 'index.json.jbuilder'
@@ -20,7 +21,7 @@ class RecordsController < ApplicationController
     if @record.save
       render 'show.json.jbuilder'
     else
-      render json: {errors: record.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: @record.errors.full_messages}, status: :unprocessable_entity
     end
     
   end
@@ -36,7 +37,7 @@ class RecordsController < ApplicationController
     if @record.save
       render 'show.json.jbuilder'
     else
-      render json: {errors: record.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: @record.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -46,7 +47,7 @@ class RecordsController < ApplicationController
     if @record.destroy
       render json: {message: "Record removed successfully"}
     else
-      render json: {errors: record.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: @record.errors.full_messages}, status: :unprocessable_entity
     end
 
   end

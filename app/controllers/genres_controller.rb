@@ -15,7 +15,7 @@ class GenresController < ApplicationController
     if @genre.save 
       render 'show.json.jbuilder'
     else
-      render json: {errors: genre.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: @genre.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -27,7 +27,7 @@ class GenresController < ApplicationController
     if @genre.save
       render 'show.json.jbuilder'
     else
-      render json: {errors: genre.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: @genre.errors.full_messages}, status: :unprocessable_entity
     end
     
   end
@@ -38,7 +38,7 @@ class GenresController < ApplicationController
     if @genre.destroy
       render json: {message: "Genre removed successfully"}
     else
-      render json: {errors: genre.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: @genre.errors.full_messages}, status: :unprocessable_entity
     end
     
   end

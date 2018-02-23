@@ -1,10 +1,14 @@
 class UserRecordsController < ApplicationController
-  belongs_to :record 
-  belongs_to :user
-
+  before_action :authenticate_user 
   def index
-    @user_record = current_user.user_records
+    @user_records = current_user.user_records.where(status: params[:status])
     render 'index.json.jbuilder'
+    
+  end
+  
+  def show
+    @user_record = current_user.user_records.find(params[:id])
+    render 'show.json.jbuilder'
     
   end
 
@@ -17,7 +21,7 @@ class UserRecordsController < ApplicationController
     if @user_record.save
       render 'show.json.jbuilder'
     else
-      render json: {errors: user_record.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: @user_record.errors.full_messages}, status: :unprocessable_entity
     end
     
   end
@@ -27,7 +31,7 @@ class UserRecordsController < ApplicationController
     if @user_record.update(status: 2)
       render json: {message: "Record removed from your collection"}
     else
-      render json: {errors: user_record.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: @user_record.errors.full_messages}, status: :unprocessable_entity
     end
   end
 

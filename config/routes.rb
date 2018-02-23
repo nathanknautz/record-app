@@ -9,8 +9,9 @@ Rails.application.routes.draw do
 
   #user record routes
   get "/user_records" => 'user_records#index'
+  get "/user_records/:id" => 'user_records#show'
   post "/user_records" => 'user_records#create'
-  delete "/user_records" => 'user_records#destroy'
+  delete "/user_records/:id" => 'user_records#destroy'
 
   #user routes
   post "/users" => 'users#create'

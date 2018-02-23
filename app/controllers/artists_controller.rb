@@ -19,7 +19,7 @@ class ArtistsController < ApplicationController
     if @artist.save
       render 'show.json.jbuilder'
     else
-      render json: {errors: artist.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: @artist.errors.full_messages}, status: :unprocessable_entity
     end
 
   end
@@ -31,7 +31,7 @@ class ArtistsController < ApplicationController
     if @artist.save 
       render 'show.json.jbuilder'
     else
-      render json: {errors: artist.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: @artist.errors.full_messages}, status: :unprocessable_entity
     end
     
   end
@@ -42,7 +42,7 @@ class ArtistsController < ApplicationController
     if @artist.destroy
       render json: {message: "Artist removed successfully"}
     else
-      render json: {errors: artist.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: @artist.errors.full_messages}, status: :unprocessable_entity
     end
   end
 end
