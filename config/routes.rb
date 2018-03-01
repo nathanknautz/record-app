@@ -30,5 +30,10 @@ Rails.application.routes.draw do
   patch "/genres/:id" => 'genres#update'
   delete "/genres/:id" => 'genres#destroy'
   
+  #spotify
+  get '/spotify/authorize' => 'related_artists#authorize'
+  get '/spotify/callback' => 'related_artists#callback'
+  get '/spotify/tokens' => 'related_artists#tokens'
+  get '/spotify/profile' => 'related_artists#profile'
 
 end

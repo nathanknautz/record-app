@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180218223149) do
+ActiveRecord::Schema.define(version: 20180301031539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20180218223149) do
     t.text "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "discogs_ref"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -60,7 +61,7 @@ ActiveRecord::Schema.define(version: 20180218223149) do
 
   create_table "user_records", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "price"
+    t.decimal "price", precision: 6, scale: 2
     t.integer "record_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

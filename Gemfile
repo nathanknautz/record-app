@@ -21,6 +21,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
 gem 'unirest'
 gem 'knock'
+gem 'discogs-wrapper'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
