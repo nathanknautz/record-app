@@ -1,27 +1,69 @@
 require "discogs-wrapper"
-
 wrapper = Discogs::Wrapper.new("vinyl collection", user_token: "wwUTppzLTLLYndLjLGVdIiPrpkkHGphFRlpRkhgG")
 
+# count = 0
+# arrays = CSV.read("/Users/davidaugustine/Desktop/artists.csv", "rb")
+# start = false
+# arrays.each do |array|
+#   puts array[0]
+#   if array[0].strip == "Sixto Rodriguez"
+#     start = true
+#   end
+#   if start
+#     sleep(3.0)
+#     search  = wrapper.search(array[0], :per_page => 1, :type => :artist)
+#     if search.results.length > 0
+#       artist_id = search.results.first.id
+#       artist  = wrapper.get_artist(artist_id)
+#       puts artist_id
+#       puts artist.name
+#       puts artist.profile
+#       if !Artist.find_by(name: artist.name) 
+#         Artist.create(name: artist.name, bio: artist.profile, discogs_ref: artist_id)
+#       end
+#     end
+#   end
+# end
 count = 0
-arrays = CSV.read("/Users/davidaugustine/Desktop/artists.csv", "rb")
-start = false
-arrays.each do |array|
-  puts array[0]
-  if array[0].strip == '2Pac'
-    start = true
-  end
-  if start
-    sleep(2.0)
-    search  = wrapper.search(array[0], :per_page => 1, :type => :artist)
-    if search.results.length > 0
-      artist_id = search.results.first.id
-      artist  = wrapper.get_artist(artist_id)
-      puts artist_id
-      puts artist.name
-      puts artist.profile
-      if !Artist.find_by(name: artist.name) 
-        Artist.create(name: artist.name, bio: artist.profile, discogs_ref: artist_id)
+artists = Artist.all 
+artists.each do |artist|
+  puts artist.name
+  artist_ref = artist.discogs_ref
+  releases = wrapper.get_artist_releases(artist_ref, :per_page => 200).releases
+  releases.each do |release|
+    if release.artist == artist.name
+      if release.main_release
+        record = wrapper.get_release(release.main_release)
+        sleep(1.0)
+        if record.tracklist.length > 5
+          track_names = ""
+          puts record.title
+          record.tracklist.each do |track|
+            if track_names == ""
+              track_names = track.title
+            else
+              track_names += ", #{track.title}"
+            end
+          end
+          if !Record.find_by(title: record.title)
+            new_record = Record.create(title: record.title, tracklist: track_names, release_year: release.year,discogs_album_ref: release.main_release)
+            ArtistRecord.create(artist_id: artist.id, record_id: new_record.id)
+            if record.styles 
+              record.styles.each do |style|
+                if !Genre.find_by(name: style)
+                  Genre.create(name: style)
+                end
+                genre = Genre.find_by(name: style)
+                RecordGenre.create(record_id: new_record.id, genre_id: genre.id)
+              end
+            end
+          end
+        end
       end
     end
   end
+  # count += 1
+  # if count > 1
+  #   break
+  # end
 end
