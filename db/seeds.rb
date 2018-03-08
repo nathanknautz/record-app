@@ -24,46 +24,53 @@ wrapper = Discogs::Wrapper.new("vinyl collection", user_token: "wwUTppzLTLLYndLj
 #     end
 #   end
 # end
-count = 0
-artists = Artist.all 
-artists.each do |artist|
-  puts artist.name
-  artist_ref = artist.discogs_ref
-  releases = wrapper.get_artist_releases(artist_ref, :per_page => 200).releases
-  releases.each do |release|
-    if release.artist == artist.name
-      if release.main_release
-        record = wrapper.get_release(release.main_release)
-        sleep(1.0)
-        if record.tracklist.length > 5
-          track_names = ""
-          puts record.title
-          record.tracklist.each do |track|
-            if track_names == ""
-              track_names = track.title
-            else
-              track_names += ", #{track.title}"
-            end
-          end
-          if !Record.find_by(title: record.title)
-            new_record = Record.create(title: record.title, tracklist: track_names, release_year: release.year,discogs_album_ref: release.main_release)
-            ArtistRecord.create(artist_id: artist.id, record_id: new_record.id)
-            if record.styles 
-              record.styles.each do |style|
-                if !Genre.find_by(name: style)
-                  Genre.create(name: style)
-                end
-                genre = Genre.find_by(name: style)
-                RecordGenre.create(record_id: new_record.id, genre_id: genre.id)
-              end
-            end
-          end
-        end
-      end
-    end
-  end
-  # count += 1
-  # if count > 1
-  #   break
-  # end
-end
+# count = 0
+# artists = Artist.all 
+# artists.each do |artist|
+#   if artist.id > 2452
+#     puts artist.name
+#     artist_ref = artist.discogs_ref
+#     releases = wrapper.get_artist_releases(artist_ref, :per_page => 200).releases
+#     if releases 
+#       releases.each do |release|
+#         if release.artist == artist.name
+#           if release.main_release
+#             record = wrapper.get_release(release.main_release)
+#             sleep(0.9)
+#             if record.tracklist
+#               if record.tracklist.length > 5
+#                 track_names = ""
+#                 puts record.title
+#                 record.tracklist.each do |track|
+#                   if track_names == ""
+#                     track_names = track.title
+#                   else
+#                     track_names += ", #{track.title}"
+#                   end
+#                 end
+#                 if !Record.find_by(title: record.title)
+#                   new_record = Record.create(title: record.title, tracklist: track_names, release_year: release.year,discogs_album_ref: release.main_release)
+#                   ArtistRecord.create(artist_id: artist.id, record_id: new_record.id)
+#                   if record.styles 
+#                     record.styles.each do |style|
+#                       if !Genre.find_by(name: style)
+#                         Genre.create(name: style)
+#                       end
+#                       genre = Genre.find_by(name: style)
+#                       RecordGenre.create(record_id: new_record.id, genre_id: genre.id)
+#                     end
+#                   end
+#                 end
+#               end
+#             end
+#           end
+#         end
+#       end
+#     end
+#   end
+#   # count += 1
+#   # if count > 1
+#   #   break
+#   # end
+# end
+
