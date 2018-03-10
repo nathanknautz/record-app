@@ -4,7 +4,7 @@ var HomePage = {
   template: "#home-page",
   data: function() {
     return {
-      message: "Welcome to your record collection!"
+      message: "HELLO WORLD"
     };
   },
   created: function() {},

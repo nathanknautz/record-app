@@ -74,3 +74,20 @@ wrapper = Discogs::Wrapper.new("vinyl collection", user_token: "wwUTppzLTLLYndLj
 #   # end
 # end
 
+artists = Artist.all 
+artists.each do |artist|
+  sleep(0.9)
+  puts artist.name 
+  discogs_artist = wrapper.get_artist("#{artist.discogs_ref}")
+  if discogs_artist.images
+    image_url = discogs_artist.images[0].resource_url
+    if !ArtistImage.find_by(image_url: image_url)
+      puts image_url
+      puts artist.id
+      ArtistImage.create(image_url: image_url, artist_id: artist.id)
+    end
+  end
+end
+
+
+

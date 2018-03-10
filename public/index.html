@@ -1,28 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Record App</title>
+  <head>
+    <!-- Title -->
+    <title>Record Collection</title>
+
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Favicon -->
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans%3A300%2C400%2C500%2C600%2C700%2C800%7CPlayfair+Display%7CRoboto%7CRaleway%7CSpectral%7CRubik">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="/assets/vendor/bootstrap/bootstrap.min.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/vendor/icon-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/vendor/icon-line-pro/style.css">
+    <link rel="stylesheet" href="/assets/vendor/icon-line/css/simple-line-icons.css">
+    <link rel="stylesheet" href="/assets/vendor/icon-hs/style.css">
+    <link rel="stylesheet" href="/assets/vendor/hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" href="/assets/vendor/animate.css">
+    <link rel="stylesheet" href="/assets/vendor/fancybox/jquery.fancybox.css">
+    <link rel="stylesheet" href="/assets/vendor/plyr/dist/plyr.css">
+    <link rel="stylesheet" href="/assets/vendor/slick-carousel/slick/slick.css">
+
+    <!-- CSS Template -->
+    <link rel="stylesheet" href="/assets_2/css/styles.op-music.css">
+
+    <!-- CSS Customization -->
+  <link rel="stylesheet" href="/assets/css/custom.css">
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.js"></script>
   <script src="index.js" defer></script>
-</head>
+  </head>
+
 <body>
   <div id="vue-app">
+    <!-- Header v1 -->
+    <header id="js-header" class="u-header u-header--sticky-top u-header--change-appearance"
+            data-header-fix-moment="600">
+      <div class="u-header__section g-bg-gray-dark-v1 g-transition-0_3 g-py-16 g-py-10--md"
+           data-header-fix-moment-classes="u-shadow-v27">
+        <nav class="navbar navbar-expand-lg p-0 g-px-15">
+          <div class="container g-pos-rel">
+            <h4 class="g-color-white">
+              Vinyl Collection App
+            </h4>
+            <!-- Navigation -->
+            <div class="collapse navbar-collapse align-items-center flex-sm-row" id="navBar">
+              <ul id="js-scroll-nav" class="navbar-nav text-uppercase g-font-weight-700 g-font-size-11 g-pt-20 g-pt-0--lg ml-auto">
+                <li class="nav-item g-mr-15--lg g-mb-7 g-mb-0--lg active">
+                  <a href="#home" class="nav-link p-0">Home
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
+                  <a href="#musicAlbums" class="nav-link p-0">Albums</a>
+                </li>
+                <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
+                  <a href="#events" class="nav-link p-0">Artists</a>
+                </li>
+                <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
+                  <a href="#tours" class="nav-link p-0">My Collection</a>
+                </li>
+                <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
+                  <a href="#tours" class="nav-link p-0">Login</a>
+                </li>
+              </ul>
+            </div>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <!-- End Navigation -->
+          </div>
+        </nav>
+      </div>
+    </header>
 
     <router-view>
       
     </router-view>
 
+
+    <!-- Footer -->
+    <footer>
+      <div class="g-color-gray-dark-v5 g-bg-gray-dark-v1 g-py-70">
+        <div class="container">
+          <div class="row g-mb-45">
+            <div class="col-md-12 col-lg-6 g-mb-25 g-mb-0--lg">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h2 class="text-uppercase g-font-weight-700 g-font-size-default g-color-white g-mb-15">Links</h2>
+                  <ul class="list-unstyled g-mb-30 g-mb-0--md">
+                    <li class="g-pos-rel g-pl-12 g-mb-10">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">About us</a>
+                    </li>
+                    <li class="g-pos-rel g-pl-12 g-mb-10">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">News</a>
+                    </li>
+                    <li class="g-pos-rel g-pl-12 g-mb-10">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">My blog</a>
+                    </li>
+                    <li class="g-pos-rel g-pl-12 g-mb-10">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">Events</a>
+                    </li>
+                    <li class="g-pos-rel g-pl-12 mb-0">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">My albums</a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="col-sm-4">
+                  <h2 class="text-uppercase g-font-weight-700 g-font-size-default g-color-white g-mb-15">Music</h2>
+                  <ul class="list-unstyled g-mb-30 g-mb-0--md">
+                    <li class="g-pos-rel g-pl-12 g-mb-10">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">Pop</a>
+                    </li>
+                    <li class="g-pos-rel g-pl-12 g-mb-10">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">Rock n' Roll</a>
+                    </li>
+                    <li class="g-pos-rel g-pl-12 g-mb-10">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">Blues and Jazz</a>
+                    </li>
+                    <li class="g-pos-rel g-pl-12 g-mb-10">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">Rap and Hip-hop</a>
+                    </li>
+                    <li class="g-pos-rel g-pl-12 mb-0">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">Classic</a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="col-sm-5">
+                  <h2 class="text-uppercase g-font-weight-700 g-font-size-default g-color-white g-mb-15">Useful links</h2>
+                  <ul class="list-unstyled g-mb-30 g-mb-0--md">
+                    <li class="g-pos-rel g-pl-12 g-mb-10">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">Morbi massa justo</a>
+                    </li>
+                    <li class="g-pos-rel g-pl-12 g-mb-10">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">Praesent nec consecteth</a>
+                    </li>
+                    <li class="g-pos-rel g-pl-12 g-mb-10">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">Fusce mollis blandit eros</a>
+                    </li>
+                    <li class="g-pos-rel g-pl-12 g-mb-10">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">Rnteger commodo est</a>
+                    </li>
+                    <li class="g-pos-rel g-pl-12 mb-0">
+                      <i class="fa fa-circle g-absolute-centered--y g-left-0 g-font-size-8"></i>
+                      <a class="g-color-gray-dark-v5 g-color-primary--hover" href="#!">Cras volutpat sed leo</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 col-lg-6">
+              <div class="row g-mx-minus-5 g-mx-minus-10--lg">
+                <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
+                  <a class="d-block u-block-hover--scale-down" href="#!">
+                    <img class="w-100" src="assets/img-temp/600x600/img1.jpg" alt="Image description">
+                  </a>
+                </div>
+                <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
+                  <a class="d-block u-block-hover--scale-down" href="#!">
+                    <img class="w-100" src="assets/img-temp/600x600/img2.jpg" alt="Image description">
+                  </a>
+                </div>
+                <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
+                  <a class="d-block u-block-hover--scale-down" href="#!">
+                    <img class="w-100" src="assets/img-temp/600x600/img3.jpg" alt="Image description">
+                  </a>
+                </div>
+                <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
+                  <a class="d-block u-block-hover--scale-down" href="#!">
+                    <img class="w-100" src="assets/img-temp/600x600/img4.jpg" alt="Image description">
+                  </a>
+                </div>
+                <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
+                  <a class="d-block u-block-hover--scale-down" href="#!">
+                    <img class="w-100" src="assets/img-temp/600x600/img5.jpg" alt="Image description">
+                  </a>
+                </div>
+                <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
+                  <a class="d-block u-block-hover--scale-down" href="#!">
+                    <img class="w-100" src="assets/img-temp/600x600/img6.jpg" alt="Image description">
+                  </a>
+                </div>
+                <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
+                  <a class="d-block u-block-hover--scale-down" href="#!">
+                    <img class="w-100" src="assets/img-temp/600x600/img7.jpg" alt="Image description">
+                  </a>
+                </div>
+                <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
+                  <a class="d-block u-block-hover--scale-down" href="#!">
+                    <img class="w-100" src="assets/img-temp/600x600/img8.jpg" alt="Image description">
+                  </a>
+                </div>
+                <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
+                  <a class="d-block u-block-hover--scale-down" href="#!">
+                    <img class="w-100" src="assets/img-temp/600x600/img9.jpg" alt="Image description">
+                  </a>
+                </div>
+                <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
+                  <a class="d-block u-block-hover--scale-down" href="#!">
+                    <img class="w-100" src="assets/img-temp/600x600/img10.jpg" alt="Image description">
+                  </a>
+                </div>
+                <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
+                  <a class="d-block u-block-hover--scale-down" href="#!">
+                    <img class="w-100" src="assets/img-temp/600x600/img11.jpg" alt="Image description">
+                  </a>
+                </div>
+                <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
+                  <a class="d-block u-block-hover--scale-down" href="#!">
+                    <img class="w-100" src="assets/img-temp/600x600/img12.jpg" alt="Image description">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 d-flex align-items-center">
+              <p class="w-100 g-mb-15 g-mb-0--md">
+                &copy; 2018 All right reserved. Development by
+                <a class="g-font-weight-700 g-color-white" href="#!">HTML Stream</a>
+              </p>
+            </div>
+
+            <div class="col-md-6">
+              <ul class="list-inline float-md-right mb-0">
+                <li class="list-inline-item g-mr-10">
+                  <a class="u-icon-v3 g-width-35 g-height-35 g-font-size-16 g-color-gray-dark-v5 g-color-gray-light-v4--hover g-bg-gray-dark-v2 g-bg-primary--hover g-transition-0_2 g-transition--ease-in" href="#!">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item g-mr-10">
+                  <a class="u-icon-v3 g-width-35 g-height-35 g-font-size-16 g-color-gray-dark-v5 g-color-gray-light-v4--hover g-bg-gray-dark-v2 g-bg-primary--hover g-transition-0_2 g-transition--ease-in" href="#!">
+                    <i class="fa fa-pinterest-p"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item g-mr-10">
+                  <a class="u-icon-v3 g-width-35 g-height-35 g-font-size-16 g-color-gray-dark-v5 g-color-gray-light-v4--hover g-bg-gray-dark-v2 g-bg-primary--hover g-transition-0_2 g-transition--ease-in" href="#!">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a class="u-icon-v3 g-width-35 g-height-35 g-font-size-16 g-color-gray-dark-v5 g-color-gray-light-v4--hover g-bg-gray-dark-v2 g-bg-primary--hover g-transition-0_2 g-transition--ease-in" href="#!">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
   </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
 
+
+
+
+
+
+
+
+
 <template id="home-page">
   <div class="vue-component">
+    <section id="home">
+        <div class="js-carousel u-bg-overlay__inner"
+             data-arrows-classes="u-arrow-v1 g-pos-abs g-absolute-centered--y--md g-top-20x g-top-50x--md g-left-0 g-left-auto--md g-right-0--md g-width-40 g-width-60--md g-height-40 g-height-60--md g-font-size-default g-color-white g-bg-primary g-opacity-0_8--hover g-transition-0_2 g-transition--ease-in"
+             data-arrow-left-classes="fa fa-chevron-left g-mr-63--md"
+             data-arrow-right-classes="fa fa-chevron-right g-ml-43 g-ml-0--md">
+          <div class="js-slide d-flex align-items-center u-bg-overlay g-height-100vh g-min-height-600 g-bg-img-hero g-bg-black-opacity-0_7--after" style="background-image: url(vinyl-collection.jpg);">
+            <div class="u-bg-overlay__inner">
+              <div class="u-heading-v4-1 g-max-width-645 g-brd-7 g-brd-primary py-0 g-pl-30">
+                <h3 class="text-uppercase g-pos-rel g-top-minus-3 g-line-height-1 g-font-weight-600 g-font-size-default g-font-size-20--md g-color-white g-mb-15 g-mb-25--md">Hello and welcome to</h3>
+                <h2 class="u-heading-v4__title text-uppercase g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-65--md g-color-white g-mb-15">Digital Records</h2>
+                <div class="g-pos-rel g-bottom-minus-5">
+                  <p class="mb-0">Welcome to digital records. I hope you enjoy my site and have fun exploring your collection. My goal is that you are able to upload and browse your collection seamlessy and effortlessly. Thank you for stopping by.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
     <h1>{{ message }}</h1>
 
   </div>
-</template>
