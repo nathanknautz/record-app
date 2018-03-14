@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   post "/genres" => 'genres#create'
   patch "/genres/:id" => 'genres#update'
   delete "/genres/:id" => 'genres#destroy'
+
+  #search routes
+  get "/searches" => 'searches#combined_search'
   
   #spotify
   get '/spotify/authorize' => 'related_artists#authorize'

@@ -56,7 +56,7 @@
             <div class="collapse navbar-collapse align-items-center flex-sm-row" id="navBar">
               <ul id="js-scroll-nav" class="navbar-nav text-uppercase g-font-weight-700 g-font-size-11 g-pt-20 g-pt-0--lg ml-auto">
                 <li class="nav-item g-mr-15--lg g-mb-7 g-mb-0--lg active">
-                  <a href="#home" class="nav-link p-0">Home
+                  <a v-bind:href="/#/" class="nav-link p-0">Home
                     <span class="sr-only">(current)</span>
                   </a>
                 </li>
@@ -70,13 +70,13 @@
                   <a href="#tours" class="nav-link p-0">My Collection</a>
                 </li>
                 <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
-                  <a href="#tours" class="nav-link p-0">Login</a>
+                  <a href="/#/login" class="nav-link p-0">Login</a>
                 </li>
               </ul>
             </div>
             <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <input class="form-control mr-sm-2" type="text" placeholder="Enter artist or album..." aria-label="Search">
+              <a class="btn btn-outline-success my-2 my-sm-0" type="text">Search</a>
             </form>
             <!-- End Navigation -->
           </div>
@@ -84,9 +84,8 @@
       </div>
     </header>
 
-    <router-view>
-      
-    </router-view>
+      <router-view></router-view>
+
 
 
     <!-- Footer -->
@@ -180,62 +179,62 @@
               <div class="row g-mx-minus-5 g-mx-minus-10--lg">
                 <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
                   <a class="d-block u-block-hover--scale-down" href="#!">
-                    <img class="w-100" src="assets/img-temp/600x600/img1.jpg" alt="Image description">
+                    <img class="w-100" src="https://htmlstream.com/preview/unify-v2.5.1/one-pages/music/assets/img-temp/600x600/img1.jpg" alt="Image description">
                   </a>
                 </div>
                 <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
                   <a class="d-block u-block-hover--scale-down" href="#!">
-                    <img class="w-100" src="assets/img-temp/600x600/img2.jpg" alt="Image description">
+                    <img class="w-100" src="https://htmlstream.com/preview/unify-v2.5.1/one-pages/music/assets/img-temp/600x600/img2.jpg" alt="Image description">
                   </a>
                 </div>
                 <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
                   <a class="d-block u-block-hover--scale-down" href="#!">
-                    <img class="w-100" src="assets/img-temp/600x600/img3.jpg" alt="Image description">
+                    <img class="w-100" src="https://htmlstream.com/preview/unify-v2.5.1/one-pages/music/assets/img-temp/600x600/img3.jpg" alt="Image description">
                   </a>
                 </div>
                 <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
                   <a class="d-block u-block-hover--scale-down" href="#!">
-                    <img class="w-100" src="assets/img-temp/600x600/img4.jpg" alt="Image description">
+                    <img class="w-100" src="https://i.pinimg.com/736x/9e/41/a2/9e41a27589a65db1065283a10d525e9d--rage-against-the-machine-music-albums.jpg" alt="Image description">
                   </a>
                 </div>
                 <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
                   <a class="d-block u-block-hover--scale-down" href="#!">
-                    <img class="w-100" src="assets/img-temp/600x600/img5.jpg" alt="Image description">
+                    <img class="w-100" src="https://a2-images.myspacecdn.com/images03/25/a65362fb77f34748857a9761b1092c7a/600x600.jpg" alt="Image description">
                   </a>
                 </div>
                 <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
                   <a class="d-block u-block-hover--scale-down" href="#!">
-                    <img class="w-100" src="assets/img-temp/600x600/img6.jpg" alt="Image description">
+                    <img class="w-100" src="http://www.kicknit.tv/wp-content/uploads/2017/08/444-600x600.jpg" alt="Image description">
                   </a>
                 </div>
                 <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
                   <a class="d-block u-block-hover--scale-down" href="#!">
-                    <img class="w-100" src="assets/img-temp/600x600/img7.jpg" alt="Image description">
+                    <img class="w-100" src="https://images.rapgenius.com/922b8f934a36ecffb07c4cd83ecfbf2d.600x600x1.png" alt="Image description">
                   </a>
                 </div>
                 <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
                   <a class="d-block u-block-hover--scale-down" href="#!">
-                    <img class="w-100" src="assets/img-temp/600x600/img8.jpg" alt="Image description">
+                    <img class="w-100" src="https://static1.squarespace.com/static/5105d89ee4b0869f6416d903/t/5734fa9fc2ea51b32cf55a6e/1463089833112/" alt="Image description">
                   </a>
                 </div>
                 <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
                   <a class="d-block u-block-hover--scale-down" href="#!">
-                    <img class="w-100" src="assets/img-temp/600x600/img9.jpg" alt="Image description">
+                    <img class="w-100" src="http://www.musicscramble.co.uk/wp-content/uploads/2014/05/coldplay-ghost-stories-album-cover.jpg" alt="Image description">
                   </a>
                 </div>
                 <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
                   <a class="d-block u-block-hover--scale-down" href="#!">
-                    <img class="w-100" src="assets/img-temp/600x600/img10.jpg" alt="Image description">
+                    <img class="w-100" src="https://www.bathroomreader.com/wp-content/uploads/2018/02/10fleetwoodMacRumours201010-2.jpg" alt="Image description">
                   </a>
                 </div>
                 <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
                   <a class="d-block u-block-hover--scale-down" href="#!">
-                    <img class="w-100" src="assets/img-temp/600x600/img11.jpg" alt="Image description">
+                    <img class="w-100" src="http://ksassets.timeincuk.net/wp/uploads/sites/55/2013/09/RadioheadTheKingOfLimbs600-4.jpg" alt="Image description">
                   </a>
                 </div>
                 <div class="col-4 col-md-2 g-overflow-hidden g-px-5 g-px-10--lg g-mb-10 g-mb-20--lg">
                   <a class="d-block u-block-hover--scale-down" href="#!">
-                    <img class="w-100" src="assets/img-temp/600x600/img12.jpg" alt="Image description">
+                    <img class="w-100" src="https://lastfm-img2.akamaized.net/i/u/ar0/0bb8f87ced4c49b5b4f7cb45cd9f30dc" alt="Image description">
                   </a>
                 </div>
               </div>
@@ -281,17 +280,13 @@
     <!-- End Footer -->
   </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="/assets/vendor/slick-carousel/slick/slick.js"></script>
+  <script src="/assets/js/components/hs.carousel.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 <template id="home-page">
@@ -315,6 +310,380 @@
         </div>
       </section>
 
-    <h1>{{ message }}</h1>
+  </div>
+</template>
+
+<template id="search-page">
+  <div class="vue-component">
+    <section id="tours" class="g-bg-gray-light-v5 g-py-100">
+      <div class="container text-center g-width-780 g-mb-65">
+        <div class="u-heading-v2-2--bottom g-brd-primary g-mb-30">
+          <h2 class="text-uppercase u-heading-v2__title g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-40--md g-mb-0">Search Results</h2>
+        </div>
+<!-- 
+        <p class="mb-0">Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante. Nunc ullamcorper, justo a iaculis elementum, enim orci viverra eros, fringilla porttitor lorem eros vel odio.</p> -->
+      </div>
+
+      <div class="container g-bg-gray-light-v5 g-font-size-13">
+        <!-- Article -->
+        <!-- v-for="(result,index) in results" -->
+        <div v-for="result in results">
+        <article class="d-md-table text-md-left text-center w-100 g-bg-white g-mb-1" style="margin: auto;">
+          <!-- Date -->
+          <div class="text-center d-md-table-cell g-valign-middle g-width-125--md g-py-10 g-px-20">
+            <time datetime="2015-06-27">
+              <span class="d-block g-font-weight-700 
+              g-font-size-40 g-line-height-1 g-color-black">{{ index }}</span>
+            </time>
+          </div>
+          <!-- End Date -->
+
+          <!-- Article Image -->
+          <a v-if="result.images.length > 0" href="#!" class="d-md-table-cell g-valign-middle g-width-130">
+            <!-- v-bind:src="result.images[0].image_url" -->
+            <img class="d-block info-v5-2__image g-ml-minus-1" v-bind:src="result.images[0].image_url">
+          </a>
+          <a v-else href="#!" class="d-md-table-cell g-valign-middle g-width-130">
+            <!-- v-bind:src="result.images[0].image_url" -->
+            <img class="d-block info-v5-2__image g-ml-minus-1" src="https://www.mearto.com/assets/no-image-83a2b680abc7af87cfff7777d0756fadb9f9aecd5ebda5d34f8139668e0fc842.png">
+          </a>
+
+          <!-- End Article Image -->
+
+          <!-- Article Content -->
+          <div class="d-md-table-cell g-valign-middle g-py-15 g-px-20">
+            <h4 class="h6 text-uppercase g-font-weight-700">
+              <!-- {{ result.name }} -->
+              <a class="g-color-gray-dark-v2" href="#!">{{ result.name }}</a>
+            </h4>
+            <!-- {{ result.class }} -->
+            <em class="g-font-style-normal">{{ result.class }}</em>
+          </div>
+          <!-- End Article Content -->
+
+          <!-- Actions -->
+          <div class="d-md-table-cell text-md-right g-valign-middle g-pa-20">
+            <div class="g-mt-minus-10 g-mx-minus-5">
+              <a v-if="result.class === 'Artist'" class="btn btn-xl u-btn-primary rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-bind:href="'/#/artists/' + result.id" >More Info</a>
+              <a v-else class="btn btn-xl u-btn-primary rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-bind:href="'/#/records/' + result.id" >More Info</a>
+            </div>
+          </div>
+          <!-- End Actions -->
+        </article>
+      </div>
+          
+        </div>
+        <!-- End Article -->
+
+      </div>
+    </section>
+
 
   </div>
+</template>
+
+<template id="artists-index-page">
+   <div class="vue-component">
+    <h2>Nothing to see here</h2>
+  </div>
+
+
+</template>
+
+
+<template id="artists-show-page">
+  <div class="vue-component">
+    <section id="home">
+        <div class="js-carousel u-bg-overlay__inner"
+             data-arrows-classes="u-arrow-v1 g-pos-abs g-absolute-centered--y--md g-top-20x g-top-50x--md g-left-0 g-left-auto--md g-right-0--md g-width-40 g-width-60--md g-height-40 g-height-60--md g-font-size-default g-color-white g-bg-primary g-opacity-0_8--hover g-transition-0_2 g-transition--ease-in"
+             data-arrow-left-classes="fa fa-chevron-left g-mr-63--md"
+             data-arrow-right-classes="fa fa-chevron-right g-ml-43 g-ml-0--md">
+          <div class="js-slide d-flex align-items-center u-bg-overlay g-height-100vh g-min-height-600 g-bg-img-hero g-bg-black-opacity-0_7--after" :style="{ backgroundImage: 'url(\'' + artist.images[0].image_url + '\')' }">>
+            <div class="u-bg-overlay__inner">
+              <div class="u-heading-v4-1 g-max-width-645 g-brd-7 g-brd-primary py-0 g-pl-30">
+                <h2 class="u-heading-v4__title text-uppercase g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-65--md g-color-white g-mb-15">{{ artist.name }}</h2>
+                <div class="g-pos-rel g-bottom-minus-5">
+                  <p class="mb-0">{{ artist.bio }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <section id="musicAlbums" class="g-py-100">
+      <div class="container text-center g-width-780 g-mb-55">
+        <div class="u-heading-v2-2--bottom g-brd-primary g-mb-30">
+          <h2 class="text-uppercase u-heading-v2__title g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-40--md g-mb-0">{{ artist.name }}</h2>
+        </div>
+
+        <p class="mb-0">{{ artist.bio }}</p>
+      </div>
+        <div class="container">
+          <div class="row g-mb-45" >
+          <div  v-for="record in artist.records" class="col-md-4" style="margin: auto;">
+
+          <div class="card card-custom" style="margin: auto;">
+            <img class="card-img-top" v-bind:src="record.record_images[0].image_url" alt="">
+            <div class="card-body">
+              <h5 class="card-title">{{ record.title }}</h5>
+<!--               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+              <a v-bind:href="'/#/records/' + record.id" class="btn btn-primary">Details</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
+
+<template id="records-show-page">
+  <div class="vue-component">
+    <section id="blog" class="u-bg-overlay g-bg-img-hero g-bg-black-opacity-0_6--after g-py-100" :style="{ backgroundImage: 'url(\'' + record.images[0].image_url + '\')' }">
+      <div class="container text-center u-bg-overlay__inner g-width-780 g-mb-65">
+        <div class="u-heading-v2-2--bottom g-brd-primary g-mb-30">
+          <h2 class="text-uppercase u-heading-v2__title g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-40--md g-color-white g-mb-0">{{ record.title }}</h2>
+        </div>
+
+    <!--     <p class="g-color-white-opacity-0_7 mb-0">Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante. Nunc ullamcorper, justo a iaculis elementum, enim orci viverra eros, fringilla porttitor lorem eros vel odio.</p> -->
+      </div>
+
+      <div class="container u-bg-overlay__inner">
+        <div class="row">
+          <div class="col-lg-5 g-mb-30">
+            <!-- Article -->
+            <div class="row g-mx-5--sm">
+              <!-- Article Image -->
+      <!--         <div class="col-sm-5 col-lg-12 g-px-0--sm">
+                <div class="g-height-200 g-height-230--lg g-bg-size-cover" :style="{ backgroundImage: 'url(\'' + record.artist[0].artist_image + '\')'}" style="background-size: auto;"></div>
+              </div> -->
+            <div class="card" style="width: 150rem;">
+              <img class="card-img-top card-img-custom" v-bind:src="record.artist[0].artist_image" alt="Card image cap">
+            </div>
+              <!-- End Article Image -->
+
+              <!-- Article Content -->
+              <div class="col-sm-7 col-lg-12 g-px-0--sm">
+                <div class="u-info-v1-1 g-height-200 g-bg-white g-pa-20-30-0" style="overflow: scroll;">
+                  <h3 class="h6 text-uppercase g-font-weight-700 g-mb-5">
+                    <a class="g-color-black g-color-primary--hover" href="#!"> {{ record.artist[0].artist }}</a>
+                  </h3>
+                  <p class="g-font-size-14 g-color-primary g-mb-15">
+                    <time>{{ record.release_year }}</time>
+                  </p>
+                  <p class="mb-0">{{ record.artist[0].artist_bio }}</p>
+                </div>
+              </div>
+              <!-- End Article Content -->
+            </div>
+            <!-- End Article -->
+          </div>
+
+          <div class="col-lg-7">
+            <!-- Article -->
+            <div class="row g-mx-5--sm g-mb-30">
+              <!-- Article Image -->
+              <div class="col-sm-5 g-px-0--sm">
+                <div class="g-height-200 g-bg-size-cover"></div>
+              </div>
+              <!-- End Article Image -->
+
+              <!-- Article Content -->
+              <div class="col-sm-7 g-px-0--sm">
+                <div class="u-info-v1-1 g-height-300 g-bg-white g-pa-20-30-0" style="overflow: scroll;">
+                  <h3 class="h6 text-uppercase g-font-weight-700 g-mb-5">
+                    <a class="g-color-black g-color-primary--hover" href="#!">Track List</a>
+                  </h3>
+                  <p v-for="track in record.pretty_tracklist" class="mb-0 g-color-black">{{ track }}</p>
+                </div>
+              </div>
+              <!-- End Article Content -->
+            </div>
+            <!-- End Article -->
+
+            <!-- Article -->
+            <div class="row g-mx-5--sm">
+              <!-- Article Image -->
+              <div class="col-sm-5 g-px-0--sm">
+                <div class="g-height-200 g-bg-size-cover" style="background-image: url(assets/img-temp/870x428/img3.jpg);"></div>
+              </div>
+              <!-- End Article Image -->
+
+              <!-- Article Content -->
+              <div class="col-sm-7 g-px-0--sm">
+                <div class="u-info-v1-1 g-height-100 g-bg-white g-pa-20-30-0">
+                  <h3 class="h6 text-uppercase g-font-weight-700 g-mb-5">
+                    <a class="g-color-black g-color-primary--hover" href="#!"> Genres </a>
+                  </h3>
+                  <p class="mb-0 g-color-black">{{ record.pretty_genres }} </p>
+                </div>
+              </div>
+              <!-- End Article Content -->
+            </div>
+            <!-- End Article -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+  </div>
+</template>
+
+
+
+<template id="login-page">
+     <section class="u-bg-overlay g-bg-pos-top-center g-bg-img-hero g-bg-black-opacity-0_3--after g-py-100" style="background-image: url(vinyl-collection.jpg);">
+      <div class="container u-bg-overlay__inner">
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-lg-8">
+            <!-- Heading -->
+            <h1 class="g-color-white text-uppercase mb-4">Login or register an account</h1>
+            <div class="d-inline-block g-width-35 g-height-2 g-bg-white mb-4"></div>
+            <p class="lead g-color-white">The time has come to bring those ideas and plans to life. This is where we really begin to visualize your napkin sketches and make them into beautiful pixels.</p>
+            <!-- End Heading -->
+          </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center no-gutters">
+          <div class="col-lg-5 g-bg-teal g-rounded-left-5--lg-up">
+            <div class="g-pa-50" style="height: 800px;">
+              <!-- Form -->
+              <form class="g-py-15">
+                <h2 class="h3 g-color-white mb-4">Login</h2>
+                <ul>
+                  <li class="text-danger" v-for="error in loginErrors"> {{ error }}</li>
+                </ul>
+                <div class="mb-4">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input class="form-control g-color-black g-brd-left-none g-brd-white g-bg-transparent g-color-white g-placeholder-white g-pl-0 g-pr-15 g-py-13" type="email" placeholder="Username" v-model="loginEmail">
+                  </div>
+                </div>
+
+                <div class="g-mb-40">
+                  <div class="input-group rounded">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input class="form-control g-color-black g-brd-left-none g-brd-white g-bg-transparent g-color-white g-placeholder-white g-pl-0 g-pr-15 g-py-13" type="password" placeholder="Password" v-model="loginPassword">
+                  </div>
+                </div>
+
+                <div class="g-mb-60">
+                  <button v-on:click="login()" class="btn btn-md btn-block u-btn-primary rounded text-uppercase g-py-13" type="button">Login</button>
+                </div>
+
+                <div class="text-center g-pos-rel pb-2 g-mb-60">
+                  <div class="d-inline-block w-100 g-height-1 g-bg-white"></div>
+                  <span class="u-icon-v2 u-icon-size--lg g-brd-white g-color-white g-bg-teal g-font-size-default rounded-circle text-uppercase g-absolute-centered g-pa-24">OR</span>
+                </div>
+
+                <button class="btn btn-block u-btn-facebook rounded text-uppercase g-py-13 g-mb-15" type="button">
+                  <i class="mr-3 fa fa-facebook"></i>
+                  <span class="g-hidden-xs-down">Login with</span> Facebook
+                </button>
+                <button class="btn btn-block u-btn-twitter rounded text-uppercase g-py-13" type="button">
+                  <i class="mr-3 fa fa-twitter"></i>
+                  <span class="g-hidden-xs-down">Login with</span> Twitter
+                </button>
+              </form>
+              <!-- End Form -->
+            </div>
+          </div>
+
+          <div class="col-lg-5 g-bg-white g-rounded-right-5--lg-up">
+            <div class="g-pa-50" style="height: 800px;">
+              <!-- Form -->
+              <form class="g-py-15">
+                <h2 class="h3 g-color-black mb-4">Signup</h2>
+                <ul>
+                  <li class="text-danger" v-for="error in signupErrors"> {{ error }} </li>
+                </ul>
+                <p class="mb-4">Profitable contracts, invoices &amp; payments for the best cases!</p>
+
+                <div class="mb-4">
+                  <div class="input-group rounded">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text g-width-45 g-brd-right-none g-brd-gray-light-v4 g-color-gray-dark-v5"><i class="icon-finance-067 u-line-icon-pro"></i></span>
+                    </div>
+                    <input class="form-control g-color-black g-brd-left-none g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pl-0 g-pr-15 g-py-13" type="email" placeholder="Your first name" v-model="signupFirstName">
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <div class="input-group rounded">
+                    <div class="input-group-prepend">
+                   <span class="input-group-text g-width-45 g-brd-right-none g-brd-gray-light-v4 g-color-gray-dark-v5"><i class="icon-finance-067 u-line-icon-pro"></i></span>
+                    </div>
+                    <input class="form-control g-color-black g-brd-left-none g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pl-0 g-pr-15 g-py-13" type="email" placeholder="Your last name" v-model="signupLastName">
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <div class="input-group rounded">
+                    <div class="input-group-prepend">
+                     <span class="input-group-text g-width-45 g-brd-right-none g-brd-gray-light-v4 g-color-gray-dark-v5"><i class="icon-communication-062 u-line-icon-pro"></i></span>
+                    </div>
+                    <input class="form-control g-color-black g-brd-left-none g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pl-0 g-pr-15 g-py-13" type="email" placeholder="Email" v-model="signupEmail">
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <div class="input-group rounded">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text g-width-45 g-brd-right-none g-brd-gray-light-v4 g-color-gray-dark-v5"><i class="icon-media-094 u-line-icon-pro"></i></span>
+                    </div>
+                    <input class="form-control g-color-black g-brd-left-none g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pl-0 g-pr-15 g-py-13" type="password" placeholder="Your Password" v-model="signupPassword">
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <div class="input-group rounded">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text g-width-45 g-brd-right-none g-brd-gray-light-v4 g-color-gray-dark-v5"><i class="icon-media-094 u-line-icon-pro"></i></span>
+                    </div>
+                    <input class="form-control g-color-black g-brd-left-none g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pl-0 g-pr-15 g-py-13" type="password" placeholder="Password Confirmation" v-model="signupPasswordConfirmation">
+                  </div>
+                </div>
+
+      <!--           <div class="mb-1">
+                  <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-2">
+                    <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox">
+                    <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                      <i class="fa" data-check-icon="&#xf00c"></i>
+                    </div>
+                    I accept the <a href="#!">Terms and Conditions</a>
+                  </label>
+                </div> -->
+
+      <!--           <div class="mb-3">
+                  <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-2">
+                    <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox">
+                    <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                      <i class="fa" data-check-icon="&#xf00c"></i>
+                    </div>
+                    Subscribe to our newsletter
+                  </label>
+                </div> -->
+
+                <button v-on:click="signup()" class="btn btn-md btn-block u-btn-primary rounded text-uppercase g-py-13" type="button">Login</button>
+              </form>
+              <!-- End Form -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+</template>
+
+
