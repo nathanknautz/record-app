@@ -27,12 +27,15 @@
     <link rel="stylesheet" href="/assets/vendor/animate.css">
     <link rel="stylesheet" href="/assets/vendor/fancybox/jquery.fancybox.css">
     <link rel="stylesheet" href="/assets/vendor/plyr/dist/plyr.css">
-    <link rel="stylesheet" href="/assets/vendor/slick-carousel/slick/slick.css">
+
 
     <!-- CSS Template -->
     <link rel="stylesheet" href="/assets_2/css/styles.op-music.css">
 
     <!-- CSS Customization -->
+  <link type="text/css" href="css/visual.css" rel="stylesheet" />
+  <link type="text/css" href="src/css/coverflow.css" rel="stylesheet" />
+  <link type="text/css" href="libs/jquery-ui/themes/base/jquery.ui.core.css" rel="stylesheet" />
   <link rel="stylesheet" href="/assets/css/custom.css">
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
@@ -43,16 +46,16 @@
 <body>
   <div id="vue-app">
     <!-- Header v1 -->
-    <header id="js-header" class="u-header u-header--sticky-top u-header--change-appearance"
-            data-header-fix-moment="600">
-      <div class="u-header__section g-bg-gray-dark-v1 g-transition-0_3 g-py-16 g-py-10--md"
-           data-header-fix-moment-classes="u-shadow-v27">
+    <!-- <header id="js-header" class="u-header" data-header-fix-moment="600"> -->
+      <header class="sticky-top">
+        <div class="sticky-top u-header__section g-bg-gray-dark-v1 g-transition-0_3 g-py-16 g-py-10--md"
+             data-header-fix-moment-classes="u-shadow-v27">
         <nav class="navbar navbar-expand-lg p-0 g-px-15">
           <div class="container g-pos-rel">
             <h4 class="g-color-white">
-              Vinyl Collection App
+              Digital Records
             </h4>
-            <!-- Navigation -->
+
             <div class="collapse navbar-collapse align-items-center flex-sm-row" id="navBar">
               <ul id="js-scroll-nav" class="navbar-nav text-uppercase g-font-weight-700 g-font-size-11 g-pt-20 g-pt-0--lg ml-auto">
                 <li class="nav-item g-mr-15--lg g-mb-7 g-mb-0--lg active">
@@ -67,23 +70,43 @@
                   <a href="#events" class="nav-link p-0">Artists</a>
                 </li>
                 <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
-                  <a href="#tours" class="nav-link p-0">My Collection</a>
+                  <a href="/#/users" class="nav-link p-0">My Collection</a>
                 </li>
-                <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
-                  <a href="/#/login" class="nav-link p-0">Login</a>
+                <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg dropdown">
+                  <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Users
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/#/login">Login</a>
+                    <a class="dropdown-item" href="/#/signup">Signup</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/#/logout">Logout</a>
+                  </div>
                 </li>
               </ul>
             </div>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Enter artist or album..." aria-label="Search">
-              <a class="btn btn-outline-success my-2 my-sm-0" type="text">Search</a>
+
+              <form class="form-inline my-2 my-lg-0">
+                <input v-on:keyup="getResults" type="text" v-model="term" list="results" name="results" autocomplete="off">
+      <!--           <ul>
+                  <li>test</li>
+                  <li>test</li>
+                  <li>test</li>
+                </ul> -->
+                <datalist id="results" >
+                  <option v-for="result in results" > {{ result.name }}  </option>
+                </datalist>
+              </form>
+                
+              <button v-on:click="search()" class="btn btn-outline-white my-2 my-sm-0" type="text">Search</button>
             </form>
-            <!-- End Navigation -->
           </div>
-        </nav>
+        </nav> 
+
+
       </div>
     </header>
-
+ 
       <router-view></router-view>
 
 
@@ -279,11 +302,33 @@
     </footer>
     <!-- End Footer -->
   </div>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="/assets/vendor/slick-carousel/slick/slick.js"></script>
-  <script src="/assets/js/components/hs.carousel.js"></script>
+  <script src="libs/jquery-ui/jquery-1.10.2.js"></script>
+  <script src="libs/jquery-ui/ui/jquery.ui.core.js"></script>
+  <script src="libs/jquery-ui/ui/jquery.ui.widget.js"></script>
+  <script src="libs/jquery-ui/ui/jquery.ui.effect.js"></script>
+
+  <script src="lib/debounce.js"></script>
+
+  <script src="src/js/support.core.js"></script>
+  <script src="src/js/support.transform3d.js"></script>
+  <script src="src/js/renderer.3d.js"></script>
+  <script src="src/js/renderer.classic.js"></script>
+  <script src="src/js/coverflow.js"></script>
+<!--   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script>
+    var $el = $( '.coverflow' ).coverflow({
+        active : 3,
+        visibleAside: 3
+      });
+
+    $( window ).resize( debounce( function() {
+      $el.coverflow();
+    }, 20, true ));
+
+  </script>
 
 </body>
 </html>
@@ -296,7 +341,7 @@
              data-arrows-classes="u-arrow-v1 g-pos-abs g-absolute-centered--y--md g-top-20x g-top-50x--md g-left-0 g-left-auto--md g-right-0--md g-width-40 g-width-60--md g-height-40 g-height-60--md g-font-size-default g-color-white g-bg-primary g-opacity-0_8--hover g-transition-0_2 g-transition--ease-in"
              data-arrow-left-classes="fa fa-chevron-left g-mr-63--md"
              data-arrow-right-classes="fa fa-chevron-right g-ml-43 g-ml-0--md">
-          <div class="js-slide d-flex align-items-center u-bg-overlay g-height-100vh g-min-height-600 g-bg-img-hero g-bg-black-opacity-0_7--after" style="background-image: url(vinyl-collection.jpg);">
+          <div class="js-slide d-flex align-items-center u-bg-overlay g-height-100vh g-min-height-600 g-bg-img-hero g-bg-black-opacity-0_7--after" style="background-image: url(straightouttacompton.jpeg);">
             <div class="u-bg-overlay__inner">
               <div class="u-heading-v4-1 g-max-width-645 g-brd-7 g-brd-primary py-0 g-pl-30">
                 <h3 class="text-uppercase g-pos-rel g-top-minus-3 g-line-height-1 g-font-weight-600 g-font-size-default g-font-size-20--md g-color-white g-mb-15 g-mb-25--md">Hello and welcome to</h3>
@@ -421,14 +466,41 @@
       </div>
         <div class="container">
           <div class="row g-mb-45" >
-          <div  v-for="record in artist.records" class="col-md-4" style="margin: auto;">
+          <div  v-for="record in artist.records" class="col-md-4" style="margin: 10px auto;">
 
           <div class="card card-custom" style="margin: auto;">
             <img class="card-img-top" v-bind:src="record.record_images[0].image_url" alt="">
             <div class="card-body">
               <h5 class="card-title">{{ record.title }}</h5>
-<!--               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
               <a v-bind:href="'/#/records/' + record.id" class="btn btn-primary">Details</a>
+              <!-- <a v-bind:href="'/#/' + record.id" class="btn btn-info">Add to collection</a> -->
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentRecord(record)">
+                Add to collection
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">{{ currentRecord.title }}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div><img v-bind:src="currentRecord.record_images[0].image_url" style="width: 100%;" alt="">
+                        </div>
+                      <h3> {{currentRecord.release_year}} </h3>
+                      <input type="text" placeholder="Enter price of your album" v-model="price"> 
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="addToCollection">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           </div>
@@ -455,10 +527,6 @@
           <div class="col-lg-5 g-mb-30">
             <!-- Article -->
             <div class="row g-mx-5--sm">
-              <!-- Article Image -->
-      <!--         <div class="col-sm-5 col-lg-12 g-px-0--sm">
-                <div class="g-height-200 g-height-230--lg g-bg-size-cover" :style="{ backgroundImage: 'url(\'' + record.artist[0].artist_image + '\')'}" style="background-size: auto;"></div>
-              </div> -->
             <div class="card" style="width: 150rem;">
               <img class="card-img-top card-img-custom" v-bind:src="record.artist[0].artist_image" alt="Card image cap">
             </div>
@@ -527,163 +595,213 @@
         </div>
       </div>
     </section>
+  </div>
+</template>
 
 
+<template id="users-show-page">
+  <div class="vue-component">
+    <section id="user-records" class="g-bg-gray-light-v5 g-py-100">
+      <div class="container text-center g-width-780 g-mb-65">
+        <div class="u-heading-v2-2--bottom g-brd-primary g-mb-30">
+
+          <h2 class="text-uppercase u-heading-v2__title g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-40--md g-mb-0">Your Collection</h2>
+        </div>
 
 
+        <p class="mb-0">This is your full record collection. Feel free to add more or delete them as you please.</p>
+      </div>
 
 
+        
+      <div class="container g-bg-gray-light-v5 g-font-size-13">
+        <!-- Article -->
+        <div v-for="(record, index) in records" class="row">
+        <article class="d-md-table text-md-left text-center w-100 g-bg-white g-mb-1">
+          <!-- Date -->
+          <div class="text-center d-md-table-cell g-valign-middle g-width-125--md g-py-10 g-px-20">
+            <time datetime="2015-06-27">
+              <span class="d-block g-font-weight-700 g-font-size-40 g-line-height-1 g-color-black"> {{ index + 1 }} </span>
+            </time>
+          </div>
+          <!-- End Date -->
+
+          <!-- Article Image -->
+          <a href="#!" class="d-md-table-cell g-valign-middle g-width-130">
+            <img class="d-block info-v5-2__image g-ml-minus-1" v-bind:src="record.image_url">
+          </a>
+          <!-- End Article Image -->
+
+          <!-- Article Content -->
+          <div class="d-md-table-cell g-valign-middle g-py-15 g-px-20" style="width: 380px;">
+            <h4 class="h6 text-uppercase g-font-weight-700">
+              <a class="g-color-gray-dark-v2" href="#!">{{ record.title }}</a>
+            </h4>
+            <em class="g-font-style-normal">An album by: {{ record.artists }}</em>
+          </div>
+          <!-- End Article Content -->
+
+          <!-- Price -->
+          <div class="d-md-table-cell g-valign-middle g-py-5 g-px-20">
+            <strong class="g-color-gray-dark-v2">{{ record.price }}</strong>
+          </div>
+          <!-- End Price -->
+
+          <!-- Actions -->
+          <div class="d-md-table-cell text-md-right g-valign-middle g-pa-20">
+            <div class="g-mt-minus-10 g-mx-minus-5">
+              <a class="btn btn-xl u-theme-btn-gray rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" href="#!">Remove</a>
+              <a class="btn btn-xl u-btn-primary rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" href="#!">Details</a>
+            </div>
+          </div>
+          <!-- End Actions -->
+        </article>
+        </div>
+      </div>
+     
+    <!--  <div>
+      <h1>CoverflowJS</h1>
+      <div class="demo">
+        <div class="wrapper">
+          <div class="coverflow">
+            <img src="demo/img/gorillaz-plasticbeach.jpg" data-artist="Gorillaz" data-album="Plastic Beach"/>
+            <img src="demo/img/kingsofleon-comearoundsunshine.jpg" data-artist="Kings Of Leon" data-album="Come Around Sunshine"/>
+            <img src="demo/img/kidrock-bornfree.jpg" data-artist="Kid Rock" data-album="Born Free"/>
+            <img src="demo/img/recovery-recovery.jpg" data-artist="Eminem" data-album="Recovery"/>
+            <img src="demo/img/lilwayne-iamnotahumanbeing.jpg" data-artist="Lil Wayne" data-album="I Am Not A Human Being"/>
+            <img src="demo/img/mychemicalromance-dangerdays.jpg" data-artist="My Chemical Romance" data-album="Danger Days"/>
+          </div>
+        </div>
+      </div>
+     </div> -->
+        
+        
 
 
+    </section>
   </div>
 </template>
 
 
 
 <template id="login-page">
-     <section class="u-bg-overlay g-bg-pos-top-center g-bg-img-hero g-bg-black-opacity-0_3--after g-py-100" style="background-image: url(vinyl-collection.jpg);">
-      <div class="container u-bg-overlay__inner">
-        <div class="row justify-content-center text-center mb-5">
-          <div class="col-lg-8">
-            <!-- Heading -->
-            <h1 class="g-color-white text-uppercase mb-4">Login or register an account</h1>
-            <div class="d-inline-block g-width-35 g-height-2 g-bg-white mb-4"></div>
-            <p class="lead g-color-white">The time has come to bring those ideas and plans to life. This is where we really begin to visualize your napkin sketches and make them into beautiful pixels.</p>
-            <!-- End Heading -->
-          </div>
-        </div>
+  <div class="vue-component">
+    <section>
+      <div style="background-image: url(straightouttacompton.jpeg);background-repeat: no-repeat; background-size: 100%"> 
+      <div class="container g-py-100" >
+        <div class="row justify-content-center">
+          <div class="col-sm-8 col-lg-5">
+            <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
+              <header class="text-center mb-4">
+                <h2 class="h2 g-color-black g-font-weight-600">Login</h2>
+                <ul>
+                  <li v-for="error in loginErrors" class="text-danger"> {{ error }} </li>
+                </ul>
+              </header>
 
-        <div class="row justify-content-center align-items-center no-gutters">
-          <div class="col-lg-5 g-bg-teal g-rounded-left-5--lg-up">
-            <div class="g-pa-50" style="height: 800px;">
               <!-- Form -->
               <form class="g-py-15">
-                <h2 class="h3 g-color-white mb-4">Login</h2>
-                <ul>
-                  <li class="text-danger" v-for="error in loginErrors"> {{ error }}</li>
-                </ul>
                 <div class="mb-4">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
+                  <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Email:</label>
+                  <input v-model="loginEmail" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" type="email" placeholder="Your Email">
+                </div>
+
+                <div class="g-mb-35">
+                  <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Password:</label>
+                  <input v-model="loginPassword" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15 mb-3" type="password" placeholder="Your Password">
+                  <div class="row justify-content-between">
+                    <div class="col align-self-center">
+                      <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-0">
+                        <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox">
+                        <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                          <i class="fa" data-check-icon="&#xf00c"></i>
+                        </div>
+                        Keep signed in
+                      </label>
                     </div>
-                    <input class="form-control g-color-black g-brd-left-none g-brd-white g-bg-transparent g-color-white g-placeholder-white g-pl-0 g-pr-15 g-py-13" type="email" placeholder="Username" v-model="loginEmail">
+                    <div class="col align-self-center text-right">
+                      <a class="g-font-size-12" href="#!">Forgot password?</a>
+                    </div>
                   </div>
                 </div>
 
-                <div class="g-mb-40">
-                  <div class="input-group rounded">
-                    <div class="input-group-prepend">
-                    </div>
-                    <input class="form-control g-color-black g-brd-left-none g-brd-white g-bg-transparent g-color-white g-placeholder-white g-pl-0 g-pr-15 g-py-13" type="password" placeholder="Password" v-model="loginPassword">
-                  </div>
+                <div class="mb-4">
+                  <button v-on:click="login()" class="btn btn-md btn-block u-btn-primary rounded g-py-13" type="button">Login</button>
                 </div>
-
-                <div class="g-mb-60">
-                  <button v-on:click="login()" class="btn btn-md btn-block u-btn-primary rounded text-uppercase g-py-13" type="button">Login</button>
-                </div>
-
-                <div class="text-center g-pos-rel pb-2 g-mb-60">
-                  <div class="d-inline-block w-100 g-height-1 g-bg-white"></div>
-                  <span class="u-icon-v2 u-icon-size--lg g-brd-white g-color-white g-bg-teal g-font-size-default rounded-circle text-uppercase g-absolute-centered g-pa-24">OR</span>
-                </div>
-
-                <button class="btn btn-block u-btn-facebook rounded text-uppercase g-py-13 g-mb-15" type="button">
-                  <i class="mr-3 fa fa-facebook"></i>
-                  <span class="g-hidden-xs-down">Login with</span> Facebook
-                </button>
-                <button class="btn btn-block u-btn-twitter rounded text-uppercase g-py-13" type="button">
-                  <i class="mr-3 fa fa-twitter"></i>
-                  <span class="g-hidden-xs-down">Login with</span> Twitter
-                </button>
               </form>
               <!-- End Form -->
-            </div>
-          </div>
 
-          <div class="col-lg-5 g-bg-white g-rounded-right-5--lg-up">
-            <div class="g-pa-50" style="height: 800px;">
-              <!-- Form -->
-              <form class="g-py-15">
-                <h2 class="h3 g-color-black mb-4">Signup</h2>
-                <ul>
-                  <li class="text-danger" v-for="error in signupErrors"> {{ error }} </li>
-                </ul>
-                <p class="mb-4">Profitable contracts, invoices &amp; payments for the best cases!</p>
-
-                <div class="mb-4">
-                  <div class="input-group rounded">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text g-width-45 g-brd-right-none g-brd-gray-light-v4 g-color-gray-dark-v5"><i class="icon-finance-067 u-line-icon-pro"></i></span>
-                    </div>
-                    <input class="form-control g-color-black g-brd-left-none g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pl-0 g-pr-15 g-py-13" type="email" placeholder="Your first name" v-model="signupFirstName">
-                  </div>
-                </div>
-
-                <div class="mb-4">
-                  <div class="input-group rounded">
-                    <div class="input-group-prepend">
-                   <span class="input-group-text g-width-45 g-brd-right-none g-brd-gray-light-v4 g-color-gray-dark-v5"><i class="icon-finance-067 u-line-icon-pro"></i></span>
-                    </div>
-                    <input class="form-control g-color-black g-brd-left-none g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pl-0 g-pr-15 g-py-13" type="email" placeholder="Your last name" v-model="signupLastName">
-                  </div>
-                </div>
-
-                <div class="mb-4">
-                  <div class="input-group rounded">
-                    <div class="input-group-prepend">
-                     <span class="input-group-text g-width-45 g-brd-right-none g-brd-gray-light-v4 g-color-gray-dark-v5"><i class="icon-communication-062 u-line-icon-pro"></i></span>
-                    </div>
-                    <input class="form-control g-color-black g-brd-left-none g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pl-0 g-pr-15 g-py-13" type="email" placeholder="Email" v-model="signupEmail">
-                  </div>
-                </div>
-
-                <div class="mb-4">
-                  <div class="input-group rounded">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text g-width-45 g-brd-right-none g-brd-gray-light-v4 g-color-gray-dark-v5"><i class="icon-media-094 u-line-icon-pro"></i></span>
-                    </div>
-                    <input class="form-control g-color-black g-brd-left-none g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pl-0 g-pr-15 g-py-13" type="password" placeholder="Your Password" v-model="signupPassword">
-                  </div>
-                </div>
-
-                <div class="mb-4">
-                  <div class="input-group rounded">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text g-width-45 g-brd-right-none g-brd-gray-light-v4 g-color-gray-dark-v5"><i class="icon-media-094 u-line-icon-pro"></i></span>
-                    </div>
-                    <input class="form-control g-color-black g-brd-left-none g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pl-0 g-pr-15 g-py-13" type="password" placeholder="Password Confirmation" v-model="signupPasswordConfirmation">
-                  </div>
-                </div>
-
-      <!--           <div class="mb-1">
-                  <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-2">
-                    <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox">
-                    <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
-                      <i class="fa" data-check-icon="&#xf00c"></i>
-                    </div>
-                    I accept the <a href="#!">Terms and Conditions</a>
-                  </label>
-                </div> -->
-
-      <!--           <div class="mb-3">
-                  <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-2">
-                    <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox">
-                    <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
-                      <i class="fa" data-check-icon="&#xf00c"></i>
-                    </div>
-                    Subscribe to our newsletter
-                  </label>
-                </div> -->
-
-                <button v-on:click="signup()" class="btn btn-md btn-block u-btn-primary rounded text-uppercase g-py-13" type="button">Login</button>
-              </form>
-              <!-- End Form -->
+              <footer class="text-center">
+                <p class="g-color-gray-dark-v5 g-font-size-13 mb-0">Don't have an account? <a class="g-font-weight-600" href="page-signup-2.html">signup</a>
+                </p>
+              </footer>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    </section>
+  </div>
+</template>
+
+<template id="signup-page">
+  <div class="vue-component">
+    <section >
+      <div style="background-image: url(straightouttacompton.jpeg);background-repeat: no-repeat; background-size: 100%"> 
+      <div class="container g-py-100" >
+      <div class="row justify-content-center">
+        <div class="col-sm-10 col-md-9 col-lg-6">
+          <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
+            <header class="text-center mb-4">
+              <h2 class="h2 g-color-black g-font-weight-600">Signup</h2>
+              <ul>
+                <li v-for="error in signupErrors"> {{ error }} </li>
+              </ul>
+            </header>
+
+            <!-- Form -->
+            <form class="g-py-15">
+              <div class="row">
+                <div class="col-xs-12 col-sm-6 mb-4">
+                  <input v-model="signupFirstName" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" type="email" placeholder="First Name">
+                </div>
+
+                <div class="col-xs-12 col-sm-6 mb-4">
+                  <input v-model="signupLastName" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" type="tel" placeholder="Last Name">
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <input v-model="signupEmail" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" type="email" placeholder="Email">
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12 col-sm-6 mb-4">
+                  <input v-model="signupPassword" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" type="password" placeholder="Password">
+                </div>
+
+                <div class="col-xs-12 col-sm-6 mb-4">
+                  <input  v-model="signupPasswordConfirmation" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" type="password" placeholder="Password Confirmation">
+                </div>
+              </div>
+              <button v-on:click="signup()" class="btn btn-md btn-block u-btn-primary g-rounded-50 g-py-13 mb-4" type="button">Signup</button>
+            </form>
+            <!-- End Form -->
+
+            <footer class="text-center">
+              <p class="g-color-gray-dark-v5 g-font-size-13 mb-0">Already have an account? <a class="g-font-weight-600" href="page-signup3.html">signin</a>
+              </p>
+            </footer>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    </div>
     </section>
 
+  </div>
 </template>
 
 

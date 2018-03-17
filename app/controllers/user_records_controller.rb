@@ -1,7 +1,8 @@
 class UserRecordsController < ApplicationController
   before_action :authenticate_user 
   def index
-    @user_records = current_user.user_records.where(status: params[:status])
+    @user_records = current_user.user_records
+    # .where(status: params[:status] -- add this to view to show wishlist/owned
     render 'index.json.jbuilder'
     
   end

@@ -20,7 +20,7 @@ var SearchPage = {
   },
   created: function() {
     axios
-    .get("/searches?term=" + this.$route.query.term)
+    .get(this.$route.fullPath)
     .then(function(response) {
       this.results = response.data;
     }.bind(this));
@@ -48,7 +48,9 @@ var ArtistsShowPage = {
       artist: {
         images: [{image_url:""}],
         records: [{title:"", release_year:"", record_images: []}]
-      }
+      },
+      currentRecord: {record_images: [{image_url: "", tracklist: []}]},
+      price: ""
     };
   },
   created: function() {
@@ -56,6 +58,21 @@ var ArtistsShowPage = {
     .then(function(response) {
       this.artist = response.data;
     }.bind(this));
+  },
+  methods: {
+    setCurrentRecord: function(record) {
+      this.currentRecord = record;
+    },
+    addToCollection: function() {
+      var params = {record_id: this.currentRecord.id, 
+                    price: this.price,
+                    status: 0 }
+      axios
+      .post("/user_records", params)
+      .then(function(response) {
+        
+      });
+    }
   },
   computed: {
    groupedRecords: function() {
@@ -84,35 +101,40 @@ var RecordsShowPage = {
 
 };
 
-var LoginAndSignupPage = {
+var UsersShowPage = {
+  template: "#users-show-page",
+  data: function() {
+    return {
+      records: []
+    };
+  },
+  created: function() {
+    axios.get("/user_records/")
+    .then(function(response) {
+      this.records = response.data;
+    }.bind(this));
+  }
+
+};
+
+var LoginPage = {
   template: "#login-page",
   data: function() {
     return { 
               loginEmail: "",
               loginPassword: "",
-              loginErrors: [],
-              signupEmail: "",
-              signupPassword: "",
-              signupPasswordConfirmation: "",
-              signupFirstName: "",
-              signupLastName: "",
-              signupErrors: []
+              loginErrors: []
     };
   },
   created: function() {},
   methods: {
-    login: function(newParams = 0) {
-      console.log("hello")
+    login: function() {
       var params = {};
-      if (newParams === 1) {
        params = { auth: {
         email: this.loginEmail,
         password: this.loginPassword    
         }
       };  
-      } else {
-        params = newParams;
-      }
       axios
       .post("/user_token", params)
       .then(function(response) { 
@@ -127,7 +149,26 @@ var LoginAndSignupPage = {
         this.loginPassword = "";
       }.bind(this));
 
-    },
+    }
+  },
+  computed: {}
+};
+
+
+var SignupPage = {
+  template: "#signup-page",
+  data: function() {
+    return { 
+              signupEmail: "",
+              signupPassword: "",
+              signupPasswordConfirmation: "",
+              signupFirstName: "",
+              signupLastName: "",
+              signupErrors: []
+    };
+  },
+  created: function() {},
+  methods: {
     signup: function() {
       var params = {
       first_name: this.signupFirstName,
@@ -139,8 +180,7 @@ var LoginAndSignupPage = {
       axios
       .post("/users", params)
       .then(function(response) {
-        params = { auth: { email: this.signupEmail, password: this.signupPassword }};
-        this.login(params);
+        router.push("/");
       })
       .catch(function(error) {
         this.signupErrors = error.response.data.errors;
@@ -150,6 +190,14 @@ var LoginAndSignupPage = {
   computed: {}
 };
 
+var LogoutPage = {
+  template: "#logout-page",
+    created: function() {
+      axios.defaults.headers.common["Authorization"] = undefined;
+      localStorage.removeItem("jwt");
+      router.push("/");
+    },
+  };
 
 
 var router = new VueRouter({
@@ -158,7 +206,10 @@ var router = new VueRouter({
            { path: "/artists", component: ArtistsIndexPage },
            { path: "/artists/:id", component: ArtistsShowPage },
            { path: "/records/:id", component: RecordsShowPage },
-           { path: "/login/", component: LoginAndSignupPage}],
+           { path: "/users/", component: UsersShowPage },
+           { path: "/login/", component: LoginPage},
+           { path: "/signup/", component: SignupPage},
+           { path: "/logout/", component: LogoutPage}],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
   }
@@ -166,5 +217,34 @@ var router = new VueRouter({
 
 var app = new Vue({
   el: "#vue-app",
-  router: router
+  router: router,
+  data: function() {
+    return {term: "",
+            results: []
+          }
+  },
+  created: function() {
+    var jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      axios.defaults.headers.common["Authorization"] = jwt;
+    }
+  },
+  methods: {
+    search: function() {
+      router.push({ path: '/searches', query: { term: this.term }});
+      this.results = [];
+     },
+     getResults: function() {
+      if ( this.term === "") {
+       this.results = [];
+      }
+      else {   
+      axios
+      .get("/searches?term=" + this.term)
+      .then(function(response) {
+        this.results = response.data;
+      }.bind(this));}
+    
+     }
+    }
 });

@@ -6,3 +6,34 @@
     width: 100%;
     height: 100%;
 }
+
+input {
+  width: 100%;
+  padding: 0.2em 0.2em;
+  font-size: 1.1em;
+  border-radius: 3px;
+  border: 1px solid #cc3300;
+}
+input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+.testing {
+  width: 300px;
+  position: realtive;
+  z-index: 99;
+  top: 50px;
+  right: -10px;
+  background-color: black;
+  text-decoration-color: white;
+  list-style-type: none;
+
+}
+
+.card-img-top {
+    width: 100%;
+    height: 25vw;
+    object-fit: cover;
+}
+/*.card-body {
+  width: 100%;
+}*/

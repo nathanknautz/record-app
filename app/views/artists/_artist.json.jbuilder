@@ -9,6 +9,7 @@ json.records artist.records.each do |record|
   json.id record.id
   json.title record.title 
   json.release_year record.release_year
+  json.tracklist record.pretty_tracklist
   json.record_images record.images.each do |image|
     json.image_url image.image_url
   end

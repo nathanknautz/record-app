@@ -1,5 +1,5 @@
-require "discogs-wrapper"
-wrapper = Discogs::Wrapper.new("vinyl collection", user_token: "wwUTppzLTLLYndLjLGVdIiPrpkkHGphFRlpRkhgG")
+# require "discogs-wrapper"
+# wrapper = Discogs::Wrapper.new("vinyl collection", user_token: "wwUTppzLTLLYndLjLGVdIiPrpkkHGphFRlpRkhgG")
 
 # count = 0
 # arrays = CSV.read("/Users/davidaugustine/Desktop/artists.csv", "rb")
@@ -89,22 +89,44 @@ wrapper = Discogs::Wrapper.new("vinyl collection", user_token: "wwUTppzLTLLYndLj
 #   end
 # end
 
-records = Record.all 
-records.each do |record|
-  if record.id > 21164
-    sleep(0.9)
-    puts record.title 
-    discogs_record = wrapper.get_release("#{record.discogs_album_ref}")
-    if discogs_record.images
-      image_url = discogs_record.images[0].resource_url
-      if !Image.find_by(image_url: image_url)
-        puts image_url
-        puts record.id
-        Image.create(image_url: image_url, record_id: record.id)
-      end
-    end
-  end
-end
+# records = Record.all 
+# records.each do |record|
+#   if record.id > 21164
+#     sleep(0.9)
+#     puts record.title 
+#     discogs_record = wrapper.get_release("#{record.discogs_album_ref}")
+#     if discogs_record.images
+#       image_url = discogs_record.images[0].resource_url
+#       if !Image.find_by(image_url: image_url)
+#         puts image_url
+#         puts record.id
+#         Image.create(image_url: image_url, record_id: record.id)
+#       end
+#     end
+#   end
+# end
 
+UserRecord.create(record_id: 109,
+                  price: 20,
+                  user_id: 1,
+                  status: 0
+                  )
 
+UserRecord.create(record_id: 111,
+                  price: 25,
+                  user_id: 1,
+                  status: 0
+                  )
+
+UserRecord.create(record_id: 1942,
+                  price: 12,
+                  user_id: 1,
+                  status: 0
+                  )
+
+UserRecord.create(record_id: 1945,
+                  price: 30,
+                  user_id: 1,
+                  status: 1
+                  )
 
