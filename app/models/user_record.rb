@@ -1,3 +1,4 @@
+require "discogs-wrapper"
 class UserRecord < ApplicationRecord
   belongs_to :record 
   belongs_to :user
@@ -20,5 +21,22 @@ class UserRecord < ApplicationRecord
     return artist_names.join(", ")
   end
 
+  def low_price
+    wrapper = Discogs::Wrapper.new("vinyl collection", user_token: ENV['DISCOGS_USER_TOKEN'])
+    price = wrapper.get_release(record.discogs_album_ref).lowest_price
+    puts price
+  end
+
+  def genre_count
+    genre_counter = {}
+    record.genres.each do |genre|
+      if genre_counter[genre.name] == 1
+        genre_counter[genre.name] += 1
+      else
+        genre_counter[genre.name] = 1
+      end
+    end
+    puts genre_counter
+  end
 
 end

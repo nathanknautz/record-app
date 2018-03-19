@@ -1,5 +1,5 @@
 # require "discogs-wrapper"
-# wrapper = Discogs::Wrapper.new("vinyl collection", user_token: "wwUTppzLTLLYndLjLGVdIiPrpkkHGphFRlpRkhgG")
+#
 
 # count = 0
 # arrays = CSV.read("/Users/davidaugustine/Desktop/artists.csv", "rb")

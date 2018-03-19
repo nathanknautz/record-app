@@ -46,11 +46,10 @@ var ArtistsShowPage = {
   data: function() {
     return {
       artist: {
-        images: [{image_url:""}],
-        records: [{title:"", release_year:"", record_images: []}]
+        records: [{title:"", release_year:""}]
       },
       currentRecord: {record_images: [{image_url: "", tracklist: []}]},
-      price: ""
+      price: "",
     };
   },
   created: function() {
@@ -63,16 +62,17 @@ var ArtistsShowPage = {
     setCurrentRecord: function(record) {
       this.currentRecord = record;
     },
-    addToCollection: function() {
+    addToCollection: function(status) {
+      var list = status;
       var params = {record_id: this.currentRecord.id, 
                     price: this.price,
-                    status: 0 }
+                    status: list };
       axios
       .post("/user_records", params)
       .then(function(response) {
-        
       });
-    }
+    },
+
   },
   computed: {
    groupedRecords: function() {
@@ -89,8 +89,25 @@ var RecordsShowPage = {
     return {
       record: {
         genres: [{name: ""}, {images: []}]
-      }
+      },
+      currentRecord: {image_url: "", tracklist: [] },
+      price: ""
     };
+  },
+  methods: {
+    setCurrentRecord: function(record) {
+      this.currentRecord = record;
+    },
+    addToCollection: function(status) {
+      var list = status;
+      var params = {record_id: this.currentRecord.id, 
+                    price: this.price,
+                    status: list };
+      axios
+      .post("/user_records", params)
+      .then(function(response) {
+      });
+    }
   },
   created: function() {
     axios.get("/records/" + this.$route.params.id)
@@ -98,21 +115,207 @@ var RecordsShowPage = {
       this.record = response.data;
     }.bind(this));
   }
-
 };
 
 var UsersShowPage = {
   template: "#users-show-page",
   data: function() {
     return {
-      records: []
+      collection: [],
+      wishList: [],
+      totalAmount: 0,
+      fifty: 0,
+      sixty: 0,
+      seventy: 0,
+      eighty: 0,
+      ninety: 0,
+      hundred: 0,
+      ten: 0,
+      genres: {},
+      pieGenres: []
+
     };
   },
-  created: function() {
-    axios.get("/user_records/")
-    .then(function(response) {
-      this.records = response.data;
-    }.bind(this));
+  updated: function () {
+    this.$nextTick(function () {
+      console.log(this.genres);
+      //reset models when page updates
+      this.fifty = 0;
+      this.sixty = 0;
+      this.seventy = 0;
+      this.eighty = 0;
+      this.ninety = 0;
+      this.hundred = 0;
+      this.ten = 0;
+      this.genres = {},
+      this.pieGenres = []
+      this.totalAmount = this.collection.map(function(record) {
+        return record.integer_price;
+      }).reduce(function(accumulator,currentVal){
+        return accumulator + currentVal;
+      });
+
+      //create decade models
+      this.collection.forEach(function(record) {
+        record.genres.forEach(function(genre) {
+          console.log(genre);
+          if (this.genres[genre] === 1) {
+            this.genres[genre] = this.genres[genre] + 1;
+          } else {
+            this.genres[genre] = 1;
+          }
+        }.bind(this));       
+   
+        if (record.release_year < 1960) {
+          this.fifty += 1;
+        } else if (record.release_year >= 1960 && record.release_year < 1970) {
+          this.sixty += 1;
+        } else if (record.release_year >= 1970 && record.release_year < 1980) {
+          this.seventy += 1;
+        } else if (record.release_year >= 1980 && record.release_year < 1990) {
+          this.eighty += 1;
+        } else if (record.release_year >= 1990 && record.release_year < 2000) {
+          this.ninety += 1;
+        } else if (record.release_year >= 2000 && record.release_year < 2010) {
+          this.hundred += 1;
+        } else if (record.release_year >= 2010) {
+          this.ten += 1;
+        }
+      }.bind(this));
+      for (var key in this.genres) {
+        this.pieGenres.push([key, this.genres[key], false]);
+      }
+      var $el = $( '.coverflow' ).coverflow({
+        active : 1,
+        visibleAside: 2
+      });
+ 
+    $( window ).resize( debounce( function() {
+      $el.coverflow();
+    }, 20, true ));
+
+
+      Highcharts.chart('decadesChart', {
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: 'Music by Decade'
+          },
+          xAxis: {
+              categories: [
+                  '50s',
+                  '60s',
+                  '70s',
+                  '80s',
+                  '90s',
+                  '00s',
+                  '10s',
+              ],
+              crosshair: true
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: 'Number of records'
+              }
+          },
+          tooltip: {
+              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                  '<td style="padding:0"><b>{point.y:.1f} records</b></td></tr>',
+              footerFormat: '</table>',
+              shared: true,
+              useHTML: true
+          },
+          plotOptions: {
+              column: {
+                  pointPadding: 0.2,
+                  borderWidth: 0
+              }
+          },
+          series: [{
+              name: '50s',
+              data: [this.fifty]
+
+          }, {
+              name: '60s',
+              data: [this.sixty]
+
+          }, {
+              name: '70s',
+              data: [this.seventy]
+
+          }, {
+              name: '80s',
+              data: [this.eighty]
+
+          }, {
+              name: '90s',
+              data: [this.ninety]
+          }, {
+              name: '2000s',
+              data: [this.hundred ]   
+          }, {
+              name: '2010s',
+              data: [this.ten ]    
+          }]
+      });
+      })
+      Highcharts.chart('pieChart', {
+
+          title: {
+              text: 'Music by Genre'
+          },
+
+          xAxis: {
+              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+          },
+
+          series: [{
+              type: 'pie',
+              allowPointSelect: true,
+              keys: ['name', 'y', 'selected', 'sliced'],
+              data: this.pieGenres,
+              showInLegend: true
+          }]
+      });
+
+
+
+    },
+    created: function() {
+      // window.location.reload(true);
+      axios.get("/user_records/")
+      .then(function(response) {
+        console.log(response.data);
+        this.collection = response.data.filter(function(record) {
+          return record.status === "owned";
+        });
+        this.wishList = response.data.filter(function(record) {
+          return record.status === "wish_list";
+
+
+        });
+      }.bind(this));
+
+
+
+  },
+
+  methods: {
+    removeRecord: function(record) {
+      axios
+      .delete("/user_records/" + record.id)
+      .then(function(response) {
+        this.collection = response.data.filter(function(record) {
+          return record.status === "owned";
+        });
+        this.wishList = response.data.filter(function(record) {
+          return record.status === "wish_list";
+        });
+      }.bind(this));
+    }
   }
 
 };
@@ -248,3 +451,9 @@ var app = new Vue({
      }
     }
 });
+
+
+
+
+
+

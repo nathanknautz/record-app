@@ -28,6 +28,11 @@
     <link rel="stylesheet" href="/assets/vendor/fancybox/jquery.fancybox.css">
     <link rel="stylesheet" href="/assets/vendor/plyr/dist/plyr.css">
 
+    <!-- COVERFLOW STYLING -->
+    <link type="text/css" href="css/visual.css" rel="stylesheet" />
+    <link type="text/css" href="src/css/coverflow.css" rel="stylesheet" />
+    <link type="text/css" href="libs/jquery-ui/themes/base/jquery.ui.core.css" rel="stylesheet" />
+
 
     <!-- CSS Template -->
     <link rel="stylesheet" href="/assets_2/css/styles.op-music.css">
@@ -39,7 +44,23 @@
   <link rel="stylesheet" href="/assets/css/custom.css">
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+  <script src="libs/jquery-ui/jquery-1.10.2.js"></script>
+  <script src="libs/jquery-ui/ui/jquery.ui.core.js"></script>
+  <script src="libs/jquery-ui/ui/jquery.ui.widget.js"></script>
+  <script src="libs/jquery-ui/ui/jquery.ui.effect.js"></script>
+
+  <script src="lib/debounce.js"></script>
+
+  <script src="src/js/support.core.js"></script>
+  <script src="src/js/support.transform3d.js"></script>
+  <script src="src/js/renderer.3d.js"></script>
+  <script src="src/js/renderer.classic.js"></script>
+  <script src="src/js/coverflow.js"></script>
+
   <script src="index.js" defer></script>
   </head>
 
@@ -98,7 +119,7 @@
                 </datalist>
               </form>
                 
-              <button v-on:click="search()" class="btn btn-outline-white my-2 my-sm-0" type="text">Search</button>
+              <button v-on:click="search()" class="btn btn-outline-light my-2 my-sm-0" type="text">Search</button>
             </form>
           </div>
         </nav> 
@@ -302,33 +323,12 @@
     </footer>
     <!-- End Footer -->
   </div>
-  <script src="libs/jquery-ui/jquery-1.10.2.js"></script>
-  <script src="libs/jquery-ui/ui/jquery.ui.core.js"></script>
-  <script src="libs/jquery-ui/ui/jquery.ui.widget.js"></script>
-  <script src="libs/jquery-ui/ui/jquery.ui.effect.js"></script>
 
-  <script src="lib/debounce.js"></script>
 
-  <script src="src/js/support.core.js"></script>
-  <script src="src/js/support.transform3d.js"></script>
-  <script src="src/js/renderer.3d.js"></script>
-  <script src="src/js/renderer.classic.js"></script>
-  <script src="src/js/coverflow.js"></script>
 <!--   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-  <script>
-    var $el = $( '.coverflow' ).coverflow({
-        active : 3,
-        visibleAside: 3
-      });
-
-    $( window ).resize( debounce( function() {
-      $el.coverflow();
-    }, 20, true ));
-
-  </script>
 
 </body>
 </html>
@@ -372,13 +372,13 @@
       <div class="container g-bg-gray-light-v5 g-font-size-13">
         <!-- Article -->
         <!-- v-for="(result,index) in results" -->
-        <div v-for="result in results">
+        <div v-for="(result,index) in results">
         <article class="d-md-table text-md-left text-center w-100 g-bg-white g-mb-1" style="margin: auto;">
           <!-- Date -->
           <div class="text-center d-md-table-cell g-valign-middle g-width-125--md g-py-10 g-px-20">
             <time datetime="2015-06-27">
               <span class="d-block g-font-weight-700 
-              g-font-size-40 g-line-height-1 g-color-black">{{ index }}</span>
+              g-font-size-40 g-line-height-1 g-color-black">{{ index + 1 }}</span>
             </time>
           </div>
           <!-- End Date -->
@@ -427,15 +427,6 @@
   </div>
 </template>
 
-<template id="artists-index-page">
-   <div class="vue-component">
-    <h2>Nothing to see here</h2>
-  </div>
-
-
-</template>
-
-
 <template id="artists-show-page">
   <div class="vue-component">
     <section id="home">
@@ -443,7 +434,7 @@
              data-arrows-classes="u-arrow-v1 g-pos-abs g-absolute-centered--y--md g-top-20x g-top-50x--md g-left-0 g-left-auto--md g-right-0--md g-width-40 g-width-60--md g-height-40 g-height-60--md g-font-size-default g-color-white g-bg-primary g-opacity-0_8--hover g-transition-0_2 g-transition--ease-in"
              data-arrow-left-classes="fa fa-chevron-left g-mr-63--md"
              data-arrow-right-classes="fa fa-chevron-right g-ml-43 g-ml-0--md">
-          <div class="js-slide d-flex align-items-center u-bg-overlay g-height-100vh g-min-height-600 g-bg-img-hero g-bg-black-opacity-0_7--after" :style="{ backgroundImage: 'url(\'' + artist.images[0].image_url + '\')' }">>
+          <div class="js-slide d-flex align-items-center u-bg-overlay g-height-100vh g-min-height-600 g-bg-img-hero g-bg-black-opacity-0_7--after" :style="{ backgroundImage: 'url(\'' + artist.image_url + '\')' }">>
             <div class="u-bg-overlay__inner">
               <div class="u-heading-v4-1 g-max-width-645 g-brd-7 g-brd-primary py-0 g-pl-30">
                 <h2 class="u-heading-v4__title text-uppercase g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-65--md g-color-white g-mb-15">{{ artist.name }}</h2>
@@ -469,34 +460,35 @@
           <div  v-for="record in artist.records" class="col-md-4" style="margin: 10px auto;">
 
           <div class="card card-custom" style="margin: auto;">
-            <img class="card-img-top" v-bind:src="record.record_images[0].image_url" alt="">
+            <img class="card-img-top" v-bind:src="record.record_image_url" alt="">
             <div class="card-body">
               <h5 class="card-title">{{ record.title }}</h5>
               <a v-bind:href="'/#/records/' + record.id" class="btn btn-primary">Details</a>
               <!-- <a v-bind:href="'/#/' + record.id" class="btn btn-info">Add to collection</a> -->
-              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentRecord(record)">
-                Add to collection
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addToOwned" v-on:click="setCurrentRecord(record)">
+                Add To Library
               </button>
 
               <!-- Modal -->
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="addToOwned" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">{{ currentRecord.title }}</h5>
+                      <h4 class="modal-title" id="exampleModalLabel">{{ currentRecord.title }}</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
-                      <div><img v-bind:src="currentRecord.record_images[0].image_url" style="width: 100%;" alt="">
+                      <div><img v-bind:src="currentRecord.record_image_url" style="width: 100%;" alt="">
                         </div>
-                      <h3> {{currentRecord.release_year}} </h3>
+                      <h5 class="mb-0" style="text-align: center;"> Released: {{currentRecord.release_year}} </h5>
                       <input type="text" placeholder="Enter price of your album" v-model="price"> 
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="addToCollection">Add</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="addToCollection('owned')">Add to collection</button>
+                      <button type="button" class="btn btn-warning" data-dismiss="modal" v-on:click="addToCollection('wish_list')">Add to wishlist</button>
                     </div>
                   </div>
                 </div>
@@ -513,7 +505,7 @@
 
 <template id="records-show-page">
   <div class="vue-component">
-    <section id="blog" class="u-bg-overlay g-bg-img-hero g-bg-black-opacity-0_6--after g-py-100" :style="{ backgroundImage: 'url(\'' + record.images[0].image_url + '\')' }">
+    <section id="blog" class="u-bg-overlay g-bg-img-hero g-bg-black-opacity-0_6--after g-py-100" :style="{ backgroundImage: 'url(\'' + record.image_url + '\')' }">
       <div class="container text-center u-bg-overlay__inner g-width-780 g-mb-65">
         <div class="u-heading-v2-2--bottom g-brd-primary g-mb-30">
           <h2 class="text-uppercase u-heading-v2__title g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-40--md g-color-white g-mb-0">{{ record.title }}</h2>
@@ -575,7 +567,7 @@
             <div class="row g-mx-5--sm">
               <!-- Article Image -->
               <div class="col-sm-5 g-px-0--sm">
-                <div class="g-height-200 g-bg-size-cover" style="background-image: url(assets/img-temp/870x428/img3.jpg);"></div>
+            <!--     <div class="g-height-200 g-bg-size-cover" style="background-image: url(assets_2/img-temp/870x428/img3.jpg);"></div> -->
               </div>
               <!-- End Article Image -->
 
@@ -588,9 +580,33 @@
                   <p class="mb-0 g-color-black">{{ record.pretty_genres }} </p>
                 </div>
               </div>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recordsAdd" style="position: relative; left:380px;top:10px;" v-on:click=setCurrentRecord(record)>Add to library</button>
               <!-- End Article Content -->
             </div>
             <!-- End Article -->
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="recordsAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="exampleModalLabel">{{ currentRecord.title }}</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div><img v-bind:src="currentRecord.image_url" style="width: 100%;" alt="">
+                </div>
+              <h5 class="mb-0" style="text-align: center;"> Released: {{currentRecord.release_year}} </h5>
+              <input type="text" placeholder="Enter price of your album" v-model="price"> 
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="addToCollection('owned')">Add to collection</button>
+              <button type="button" class="btn btn-warning" data-dismiss="modal" v-on:click="addToCollection('wish_list')">Add to wishlist</button>
+            </div>
           </div>
         </div>
       </div>
@@ -598,25 +614,43 @@
   </div>
 </template>
 
+                 
+
 
 <template id="users-show-page">
   <div class="vue-component">
+
+        
     <section id="user-records" class="g-bg-gray-light-v5 g-py-100">
       <div class="container text-center g-width-780 g-mb-65">
         <div class="u-heading-v2-2--bottom g-brd-primary g-mb-30">
 
           <h2 class="text-uppercase u-heading-v2__title g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-40--md g-mb-0">Your Collection</h2>
+
+
         </div>
 
-
         <p class="mb-0">This is your full record collection. Feel free to add more or delete them as you please.</p>
+
+   
+
       </div>
 
+     
+       <div class="demo">
+         <div class="wrapper">
+           <div class="coverflow">
+             <img v-for="image in collection" v-bind:src="image.image_url" data-artist="Gorillaz" data-album="Plastic Beach"/>
+      
+           </div>
+         </div>
+       </div>
+      
 
         
       <div class="container g-bg-gray-light-v5 g-font-size-13">
         <!-- Article -->
-        <div v-for="(record, index) in records" class="row">
+        <div v-for="(record, index) in collection" class="row">
         <article class="d-md-table text-md-left text-center w-100 g-bg-white g-mb-1">
           <!-- Date -->
           <div class="text-center d-md-table-cell g-valign-middle g-width-125--md g-py-10 g-px-20">
@@ -650,37 +684,124 @@
           <!-- Actions -->
           <div class="d-md-table-cell text-md-right g-valign-middle g-pa-20">
             <div class="g-mt-minus-10 g-mx-minus-5">
-              <a class="btn btn-xl u-theme-btn-gray rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" href="#!">Remove</a>
-              <a class="btn btn-xl u-btn-primary rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" href="#!">Details</a>
+              <a class="btn btn-xl u-theme-btn-gray rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-on:click="removeRecord(record)">Remove</a>
+              <a class="btn btn-xl u-btn-primary rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-bind:href="'/#/records/' + record.record_id">Details</a>
             </div>
           </div>
           <!-- End Actions -->
         </article>
         </div>
       </div>
-     
-    <!--  <div>
-      <h1>CoverflowJS</h1>
-      <div class="demo">
-        <div class="wrapper">
-          <div class="coverflow">
-            <img src="demo/img/gorillaz-plasticbeach.jpg" data-artist="Gorillaz" data-album="Plastic Beach"/>
-            <img src="demo/img/kingsofleon-comearoundsunshine.jpg" data-artist="Kings Of Leon" data-album="Come Around Sunshine"/>
-            <img src="demo/img/kidrock-bornfree.jpg" data-artist="Kid Rock" data-album="Born Free"/>
-            <img src="demo/img/recovery-recovery.jpg" data-artist="Eminem" data-album="Recovery"/>
-            <img src="demo/img/lilwayne-iamnotahumanbeing.jpg" data-artist="Lil Wayne" data-album="I Am Not A Human Being"/>
-            <img src="demo/img/mychemicalromance-dangerdays.jpg" data-artist="My Chemical Romance" data-album="Danger Days"/>
+<!--       <div id="highChart" style="min-width: 310px; height: 400px; margin: 50px"></div> -->
+      </section>
+
+        <section id="events" class="u-bg-overlay g-bg-img-hero g-bg-attachment-fixed g-bg-black-opacity-0_6--after g-py-100" style="background-image: url(decades.jpg);">
+          <div class="container u-bg-overlay__inner" style="width: 100%">
+  
+            <div id="decadesChart"></div>
+
+            <div id="pieChart"></div>
+             
           </div>
+        </section>
+        <div style="height: 200px">
+          
         </div>
-      </div>
-     </div> -->
+
+     <section id="events" class="u-bg-overlay g-bg-img-hero g-bg-attachment-fixed g-bg-black-opacity-0_6--after g-py-100" style="background-image: url(vinyl-collection.jpg);">
+       <div class="container u-bg-overlay__inner">
+         <div class="container text-center g-width-780 g-mb-65">
+           <div class="u-heading-v2-2--bottom g-brd-primary">
+             <h2 class="text-uppercase u-heading-v2__title g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-40--md g-color-white g-mb-0">Collection Value</h2>
+           </div>
+         </div>
+
+         <div class="row g-mb-50">
+           <div class="col-md-4 ml-lg-auto">
+             <h3 class="text-uppercase g-font-weight-700 g-font-size-26 g-color-white g-mb-5">Your current record collection value</h3>
+           </div>
+
+           <div class="col-md-7">
+             <!-- Countdown -->
+             <div class="text-center g-color-white">
+
+               <div class="d-inline-block g-bg-white-opacity-0_05 g-brd-around g-brd-white-opacity-0_3 g-pa-15-20-10 g-mx-15 g-mb-30">
+                 <div class="g-line-height-1 g-font-size-40 g-font-weight-700 g-mb-2">{{ totalAmount }}</div>
+                 <span class="text-uppercase g-color-white-opacity-0_7 g-font-size-12">Dollars</span>
+               </div>
+
+             <!-- End Countdown -->
+           </div>
+         </div>
+       </div>
+     </section>
+ 
         
         
 
 
     </section>
-  </div>
-</template>
+    <section id="user-records" class="g-bg-gray-light-v5 g-py-100">
+      <div class="container text-center g-width-780 g-mb-65">
+        <div class="u-heading-v2-2--bottom g-brd-primary g-mb-30">
+
+          <h2 class="text-uppercase u-heading-v2__title g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-40--md g-mb-0">Your Wish List</h2>
+        </div>
+
+
+        <p class="mb-0">All of the albums you are saving up for.</p>
+      </div>
+
+
+        
+      <div class="container g-bg-gray-light-v5 g-font-size-13">
+        <!-- Article -->
+        <div v-for="(record, index) in wishList" class="row">
+        <article class="d-md-table text-md-left text-center w-100 g-bg-white g-mb-1">
+          <!-- Date -->
+          <div class="text-center d-md-table-cell g-valign-middle g-width-125--md g-py-10 g-px-20">
+            <time datetime="2015-06-27">
+              <span class="d-block g-font-weight-700 g-font-size-40 g-line-height-1 g-color-black"> {{ index + 1 }} </span>
+            </time>
+          </div>
+          <!-- End Date -->
+
+          <!-- Article Image -->
+          <a href="#!" class="d-md-table-cell g-valign-middle g-width-130">
+            <img class="d-block info-v5-2__image g-ml-minus-1" v-bind:src="record.image_url">
+          </a>
+          <!-- End Article Image -->
+
+          <!-- Article Content -->
+          <div class="d-md-table-cell g-valign-middle g-py-15 g-px-20" style="width: 380px;">
+            <h4 class="h6 text-uppercase g-font-weight-700">
+              <a class="g-color-gray-dark-v2" href="#!">{{ record.title }}</a>
+            </h4>
+            <em class="g-font-style-normal">An album by: {{ record.artists }}</em>
+          </div>
+          <!-- End Article Content -->
+
+          <!-- Actions -->
+          <div class="d-md-table-cell text-md-right g-valign-middle g-pa-20">
+            <div class="g-mt-minus-10 g-mx-minus-5">
+               <a class="btn btn-xl u-theme-btn-gray rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-on:click="removeRecord(record)">Remove</a>
+               <a class="btn btn-xl u-btn-primary rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-bind:href="'/#/records/' + record.record_id">Details</a>
+
+            </div>
+          </div>
+          <!-- End Actions -->
+        </article>
+        </div>
+      </div>
+      </section>
+
+  
+
+        </div>
+      </template>
+
+
+
 
 
 

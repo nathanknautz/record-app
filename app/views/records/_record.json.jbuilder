@@ -8,9 +8,7 @@ end
 json.genres record.genres.each do |genre|
   json.name genre.name
 end
-json.images record.images.each do |image|
-  json.image_url image.image_url
-end
+json.image_url record.record_image_url
 json.release_year record.release_year
 json.playtime record.playtime
 json.tracklist record.tracklist

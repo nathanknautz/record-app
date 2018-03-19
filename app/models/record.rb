@@ -22,6 +22,15 @@ class Record < ApplicationRecord
     new_genres.join(", ")
   end
 
+  def record_image_url
+    if images.length > 0
+      url = images[0].image_url
+    else
+      url = "https://www.mearto.com/assets/no-image-83a2b680abc7af87cfff7777d0756fadb9f9aecd5ebda5d34f8139668e0fc842.png"
+    end
+    return url
+  end
+
 
 end
 

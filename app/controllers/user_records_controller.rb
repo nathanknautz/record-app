@@ -29,8 +29,9 @@ class UserRecordsController < ApplicationController
 
   def destroy
     @user_record = UserRecord.find(params[:id])
+    @user_records = current_user.user_records
     if @user_record.update(status: 2)
-      render json: {message: "Record removed from your collection"}
+      render 'index.json.jbuilder'
     else
       render json: {errors: @user_record.errors.full_messages}, status: :unprocessable_entity
     end

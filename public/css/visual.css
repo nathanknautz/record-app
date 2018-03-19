@@ -1,11 +1,10 @@
 .demo {
     width: 100%;
-    height: 100%;
+    height: 600px
     min-height: 600px;
     min-width: 400px;
 
     padding: 20px 0;
-    border: 3px solid #fff;
 
     /**
      *
@@ -13,30 +12,30 @@
      * can't use css3 grid as firefox performance goes crazy
      * at least you can't call it performance..
      */
-    background: url(../img/grid.jpg) repeat top left #269;
-
+/*    background: url(../img/grid.jpg) repeat top left #269;
+*/
 }
 
 .wrapper {
-    margin: 50px auto 0;
+    margin: auto ;
     height: 600px;
     position: relative;
     overflow: hidden;
 }
 .coverflow {
-    width: 800px;
+    width: 600px;
     height: 600px;
     margin-top: 50px;
     padding-top: 100px;
 }
 
 .coverflow img {
-    width: 260px;
-    height: 260px;
+    width: 400px;
+    height: 400px;
     -webkit-box-reflect: none !important;
 }
 
-@media only screen and (max-width: 480px ) {
+/*@media only screen and (max-width: 480px ) {
 
     .demo {
         border: 3px solid red;
@@ -75,4 +74,4 @@
         margin-top: 0;
         padding-top: 0;
     }
-}
+}*/

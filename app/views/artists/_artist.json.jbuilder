@@ -1,17 +1,11 @@
 json.id artist.id
 json.name artist.name
 json.bio artist.bio
-json.images artist.artist_images.each do |image|
-  json.image_id image.id 
-  json.image_url image.image_url
-  end
+json.image_url artist.artist_image_url
 json.records artist.records.each do |record|
   json.id record.id
   json.title record.title 
   json.release_year record.release_year
   json.tracklist record.pretty_tracklist
-  json.record_images record.images.each do |image|
-    json.image_url image.image_url
+  json.record_image_url record.record_image_url
   end
-
-end
