@@ -33,11 +33,35 @@ var SearchPage = {
 var ArtistsIndexPage = {
   template: "#artists-index-page",
   data: function() {
-    return {
+    return { pages: 3,
+             artists: []
     };
   },
-  created: function() {},
-  methods: {},
+  created: function() {
+    axios.get("/artists/")
+    .then(function(response) {
+      this.artists = response.data;
+    }.bind(this));
+  },
+  methods: {
+    setPage: function(page) {
+      var number = page;
+      axios.get("/artists/?page=" + number)
+      .then(function(response) {
+        this.artists = response.data;
+      }.bind(this));
+    },
+    nextPagination: function() {
+      this.pages = this.pages + 3;
+      this.setPage(this.pages - 2);
+    },
+    prevPagination: function() {
+      if (this.pages > 3) {
+        this.pages = this.pages - 3;
+        this.setPage(this.pages - 2);
+      }
+    }
+  },
   computed: {}
 };
 
@@ -74,13 +98,58 @@ var ArtistsShowPage = {
     },
 
   },
-  computed: {
-   groupedRecords: function() {
-    console.log("HELLO WORLD")
-    console.log(_.chunk(this.artist.records, 3))
-    }
-  }
 };
+
+var RecordsIndexPage = {
+  template: "#records-index-page",
+  data: function() {
+    return { pages: 3,
+             records: [],
+             currentRecord: {},
+             price: ""
+    };
+  },
+  created: function() {
+    axios.get("/records/")
+    .then(function(response) {
+      this.records = response.data;
+    }.bind(this));
+  },
+  methods: {
+    setPage: function(page) {
+      var number = page;
+      axios.get("/records/?page=" + number)
+      .then(function(response) {
+        this.records = response.data;
+      }.bind(this));
+    },
+    nextPagination: function() {
+      this.pages = this.pages + 3;
+      this.setPage(this.pages - 2);
+    },
+    prevPagination: function() {
+      if (this.pages > 3) {
+        this.pages = this.pages - 3;
+        this.setPage(this.pages - 2);
+      }
+    },
+    setCurrentRecord: function(record) {
+      this.currentRecord = record;
+    },
+    addToCollection: function(status) {
+      var list = status;
+      var params = {record_id: this.currentRecord.id, 
+                    price: this.price,
+                    status: list };
+      axios
+      .post("/user_records", params)
+      .then(function(response) {
+      });
+    },
+  },
+  computed: {}
+};
+
 
 
 var RecordsShowPage = {
@@ -193,75 +262,7 @@ var UsersShowPage = {
     $( window ).resize( debounce( function() {
       $el.coverflow();
     }, 20, true ));
-
-
-      Highcharts.chart('decadesChart', {
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: 'Music by Decade'
-          },
-          xAxis: {
-              categories: [
-                  '50s',
-                  '60s',
-                  '70s',
-                  '80s',
-                  '90s',
-                  '00s',
-                  '10s',
-              ],
-              crosshair: true
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: 'Number of records'
-              }
-          },
-          tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                  '<td style="padding:0"><b>{point.y:.1f} records</b></td></tr>',
-              footerFormat: '</table>',
-              shared: true,
-              useHTML: true
-          },
-          plotOptions: {
-              column: {
-                  pointPadding: 0.2,
-                  borderWidth: 0
-              }
-          },
-          series: [{
-              name: '50s',
-              data: [this.fifty]
-
-          }, {
-              name: '60s',
-              data: [this.sixty]
-
-          }, {
-              name: '70s',
-              data: [this.seventy]
-
-          }, {
-              name: '80s',
-              data: [this.eighty]
-
-          }, {
-              name: '90s',
-              data: [this.ninety]
-          }, {
-              name: '2000s',
-              data: [this.hundred ]   
-          }, {
-              name: '2010s',
-              data: [this.ten ]    
-          }]
-      });
-      })
+      
       Highcharts.chart('pieChart', {
 
           title: {
@@ -281,8 +282,60 @@ var UsersShowPage = {
           }]
       });
 
+      Highcharts.chart('decadesChart', {
 
+          chart: {
+              type: 'column'
+          },
 
+          title: {
+              text: 'Music by Decades'
+          },
+          xAxis: {
+                    categories: ["Decades", "60s", "70s", "80s", "90s", "2000s", "2010s"]
+                  },
+          yAxis: [{
+              className: 'highcharts-color-0',
+              title: {
+                  text: 'Number of Records'
+              }
+          }],
+
+          plotOptions: {
+              column: {
+                  borderRadius: 5
+              }
+          },
+
+           series: [{
+               name: '50s',
+               data: [this.fifty]
+
+           }, {
+               name: '60s',
+               data: [this.sixty]
+
+           }, {
+               name: '70s',
+               data: [this.seventy]
+
+           }, {
+               name: '80s',
+               data: [this.eighty]
+
+           }, {
+               name: '90s',
+               data: [this.ninety]
+           }, {
+               name: '2000s',
+               data: [this.hundred ]   
+           }, {
+               name: '2010s',
+               data: [this.ten ]    
+           }]
+
+      });
+      })
     },
     created: function() {
       // window.location.reload(true);
@@ -408,6 +461,7 @@ var router = new VueRouter({
            { path: "/searches", component: SearchPage },
            { path: "/artists", component: ArtistsIndexPage },
            { path: "/artists/:id", component: ArtistsShowPage },
+           { path: "/records/", component: RecordsIndexPage },
            { path: "/records/:id", component: RecordsShowPage },
            { path: "/users/", component: UsersShowPage },
            { path: "/login/", component: LoginPage},
