@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   delete "/user_records/:id" => 'user_records#destroy'
 
   #user routes
+  get "users/" => 'users#index'
+  get "users/:id" => 'users#show'
   post "/users" => 'users#create'
+  
 
   #artist routes
   get "/artists" => 'artists#index'

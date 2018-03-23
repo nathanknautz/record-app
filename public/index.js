@@ -33,7 +33,7 @@ var SearchPage = {
 var ArtistsIndexPage = {
   template: "#artists-index-page",
   data: function() {
-    return { pages: 3,
+    return { pages: 6,
              artists: []
     };
   },
@@ -52,13 +52,13 @@ var ArtistsIndexPage = {
       }.bind(this));
     },
     nextPagination: function() {
-      this.pages = this.pages + 3;
-      this.setPage(this.pages - 2);
+      this.pages = this.pages + 6;
+      this.setPage(this.pages - 5);
     },
     prevPagination: function() {
       if (this.pages > 3) {
-        this.pages = this.pages - 3;
-        this.setPage(this.pages - 2);
+        this.pages = this.pages - 6;
+        this.setPage(this.pages - 5);
       }
     }
   },
@@ -74,15 +74,22 @@ var ArtistsShowPage = {
       },
       currentRecord: {record_images: [{image_url: "", tracklist: []}]},
       price: "",
+      error: "",
+      added: false
     };
   },
   created: function() {
     axios.get("/artists/" + this.$route.params.id)
     .then(function(response) {
       this.artist = response.data;
-    }.bind(this));
+    }.bind(this))
+  
   },
   methods: {
+    setAdded: function() {
+      this.added = false;
+    },
+
     setCurrentRecord: function(record) {
       this.currentRecord = record;
     },
@@ -93,8 +100,12 @@ var ArtistsShowPage = {
                     status: list };
       axios
       .post("/user_records", params)
-      .then(function(response) {
-      });
+      .then(function(){
+        this.added = true;
+      }.bind(this))
+      .catch(function(error) {
+          this.error = error;
+        }.bind(this));
     },
 
   },
@@ -103,10 +114,10 @@ var ArtistsShowPage = {
 var RecordsIndexPage = {
   template: "#records-index-page",
   data: function() {
-    return { pages: 3,
+    return { pages: 6,
              records: [],
              currentRecord: {},
-             price: ""
+             price: "",
     };
   },
   created: function() {
@@ -124,13 +135,13 @@ var RecordsIndexPage = {
       }.bind(this));
     },
     nextPagination: function() {
-      this.pages = this.pages + 3;
-      this.setPage(this.pages - 2);
+      this.pages = this.pages + 6;
+      this.setPage(this.pages - 5);
     },
     prevPagination: function() {
       if (this.pages > 3) {
-        this.pages = this.pages - 3;
-        this.setPage(this.pages - 2);
+        this.pages = this.pages - 6;
+        this.setPage(this.pages - 5);
       }
     },
     setCurrentRecord: function(record) {
@@ -143,8 +154,8 @@ var RecordsIndexPage = {
                     status: list };
       axios
       .post("/user_records", params)
-      .then(function(response) {
-      });
+      .then(function() {
+      }.bind(this));
     },
   },
   computed: {}
@@ -157,13 +168,20 @@ var RecordsShowPage = {
   data: function() {
     return {
       record: {
-        genres: [{name: ""}, {images: []}]
+        genres: [{name: ""}, {images: []}],
+        artist: [{artist_image: ""}]
       },
       currentRecord: {image_url: "", tracklist: [] },
-      price: ""
+      price: "",
+      error: "",
+      added: false
     };
   },
   methods: {
+    setAdded: function() {
+      this.added = false;
+    },
+
     setCurrentRecord: function(record) {
       this.currentRecord = record;
     },
@@ -174,8 +192,12 @@ var RecordsShowPage = {
                     status: list };
       axios
       .post("/user_records", params)
-      .then(function(response) {
-      });
+      .then(function() {
+        this.added = true;
+      }.bind(this))
+      .catch(function(error) {
+          this.error = error;
+        }.bind(this));
     }
   },
   created: function() {
@@ -185,6 +207,25 @@ var RecordsShowPage = {
     }.bind(this));
   }
 };
+
+var UsersIndexPage = {
+  template: "#users-index-page",
+  data: function() {
+    return { 
+            users: []
+    };
+  },
+  created: function() {
+    axios
+    .get("/users/")
+    .then(function(response) {
+      this.users = response.data;
+    }.bind(this));
+  },
+  methods: {},
+  computed: {}
+};
+
 
 var UsersShowPage = {
   template: "#users-show-page",
@@ -201,14 +242,16 @@ var UsersShowPage = {
       hundred: 0,
       ten: 0,
       genres: {},
-      pieGenres: []
+      pieGenres: [],
+      currentUserId: "",
+      userId: "",
+      firstName: ""
 
     };
   },
-  updated: function () {
-    this.$nextTick(function () {
-      console.log(this.genres);
-      //reset models when page updates
+  updated: function() {
+    this.$nextTick(function() {
+      //RESET MODELS ON UPDATE
       this.fifty = 0;
       this.sixty = 0;
       this.seventy = 0;
@@ -217,17 +260,17 @@ var UsersShowPage = {
       this.hundred = 0;
       this.ten = 0;
       this.genres = {},
-      this.pieGenres = []
+      this.pieGenres = [];
+      console.log(this.collection);
       this.totalAmount = this.collection.map(function(record) {
         return record.integer_price;
-      }).reduce(function(accumulator,currentVal){
+      }).reduce(function(accumulator,currentVal) {
         return accumulator + currentVal;
       });
 
-      //create decade models
+      //CREATE DECADES MODELS
       this.collection.forEach(function(record) {
         record.genres.forEach(function(genre) {
-          console.log(genre);
           if (this.genres[genre] === 1) {
             this.genres[genre] = this.genres[genre] + 1;
           } else {
@@ -251,9 +294,13 @@ var UsersShowPage = {
           this.ten += 1;
         }
       }.bind(this));
+
+      // CREATE GENRES BASED ON USER
       for (var key in this.genres) {
         this.pieGenres.push([key, this.genres[key], false]);
       }
+
+      // COVERFLOW INITIALIZER
       var $el = $( '.coverflow' ).coverflow({
         active : 1,
         visibleAside: 2
@@ -263,6 +310,7 @@ var UsersShowPage = {
       $el.coverflow();
     }, 20, true ));
       
+      //HIGH CHARTS INITIALIZER
       Highcharts.chart('pieChart', {
 
           title: {
@@ -281,6 +329,7 @@ var UsersShowPage = {
               showInLegend: true
           }]
       });
+      //HIGH CHARTS INITIALIZER
 
       Highcharts.chart('decadesChart', {
 
@@ -339,24 +388,49 @@ var UsersShowPage = {
     },
     created: function() {
       // window.location.reload(true);
-      axios.get("/user_records/")
+      this.collection = [];
+      this.wishList = [];
+      axios
+      .get("/users/" + this.$route.params.id)
       .then(function(response) {
-        console.log(response.data);
+        this.currentUserId = response.data.current_user_id;
+        this.userId = response.data.id;
+        this.firstName = response.data.first_name;
+      }.bind(this));
+
+      axios.get("/user_records/" + this.$route.params.id)
+      .then(function(response) {
         this.collection = response.data.filter(function(record) {
           return record.status === "owned";
         });
         this.wishList = response.data.filter(function(record) {
           return record.status === "wish_list";
-
-
         });
       }.bind(this));
-
-
 
   },
 
   methods: {
+    selectRecord: function(number) {
+      var index = number;
+      if (index == 1) {
+        index = "one";
+      } else if (index == 2) {
+        index = 'two'
+      } else if (index == 3) {
+        index = 'three'
+      } else if (index == 4) {
+        index = 'four'
+      } else if (index == 5) {
+        index = 'five'
+      } else {
+        index = 'zero'
+      }
+      var params = { record: index }
+      axios
+      .post("https://api.particle.io/v1/devices/2c003b001047363333343437/record?access_token=b74b4f7675873bc39b4fa7477f51f15dfab7007e", params);
+
+    },
     removeRecord: function(record) {
       axios
       .delete("/user_records/" + record.id)
@@ -373,13 +447,16 @@ var UsersShowPage = {
 
 };
 
+
+
 var LoginPage = {
   template: "#login-page",
   data: function() {
     return { 
               loginEmail: "",
               loginPassword: "",
-              loginErrors: []
+              loginErrors: [],
+              userId: ""
     };
   },
   created: function() {},
@@ -463,7 +540,8 @@ var router = new VueRouter({
            { path: "/artists/:id", component: ArtistsShowPage },
            { path: "/records/", component: RecordsIndexPage },
            { path: "/records/:id", component: RecordsShowPage },
-           { path: "/users/", component: UsersShowPage },
+           { path: "/users/", component: UsersIndexPage},
+           { path: "/users/:id", component: UsersShowPage },
            { path: "/login/", component: LoginPage},
            { path: "/signup/", component: SignupPage},
            { path: "/logout/", component: LogoutPage}],
@@ -477,7 +555,9 @@ var app = new Vue({
   router: router,
   data: function() {
     return {term: "",
-            results: []
+            results: [],
+            userId: "",
+            errors: ""
           }
   },
   created: function() {
@@ -485,8 +565,19 @@ var app = new Vue({
     if (jwt) {
       axios.defaults.headers.common["Authorization"] = jwt;
     }
+
   },
   methods: {
+    userCollection: function() {
+      axios
+      .get("/users")
+      .then(function(response) {
+        router.push("/users/" + response.data[0].current_user_id);
+      }.bind(this))
+      .catch(function(error) {
+        this.errors = error;
+      }.bind(this));
+    },
     search: function() {
       router.push({ path: '/searches', query: { term: this.term }});
       this.results = [];
@@ -501,7 +592,6 @@ var app = new Vue({
       .then(function(response) {
         this.results = response.data;
       }.bind(this));}
-    
      }
     }
 });

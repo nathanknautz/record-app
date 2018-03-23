@@ -1,8 +1,9 @@
 json.id record.id
 json.title record.title 
 json.artist record.artists.each do |artist|
+  json.id artist.id
   json.artist artist.name
-  json.artist_image artist.artist_images[0].image_url
+  json.artist_image artist.artist_image_url
   json.artist_bio artist.bio
 end
 json.genres record.genres.each do |genre|

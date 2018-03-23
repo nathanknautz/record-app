@@ -8,8 +8,12 @@ class UserRecordsController < ApplicationController
   end
   
   def show
-    @user_record = current_user.user_records.find(params[:id])
-    render 'show.json.jbuilder'
+    puts "===================================="
+    puts params[:id]
+    puts "===================================="
+    user = User.find(params[:id])
+    @user_records = user.user_records
+    render 'index.json.jbuilder'
     
   end
 

@@ -21,10 +21,14 @@ class UserRecord < ApplicationRecord
     return artist_names.join(", ")
   end
 
-  def low_price
+  def master_reference
+    arry = []
     wrapper = Discogs::Wrapper.new("vinyl collection", user_token: ENV['DISCOGS_USER_TOKEN'])
-    price = wrapper.get_release(record.discogs_album_ref).lowest_price
-    puts price
+    release = wrapper.get_release(record.discogs_album_ref)
+    arry << release.master_id
+    arry << release.lowest_price
+    return arry
+     
   end
 
   def genre_count

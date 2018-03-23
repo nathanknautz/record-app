@@ -1,11 +1,15 @@
 class ArtistsController < ApplicationController
   def index
-    page = 0
-    puts params["page"]
-    if params["page"].to_i > 1
-     page = params["page"].to_i * 20
+    # page = 0
+    # puts params["page"]
+    # if params["page"].to_i > 1
+    #  page = params["page"].to_i * 20
+    # end
+    if params["page"].to_i > 0
+      page = (params["page"].to_i - 1) * 20
+    else 
+      page = 0
     end
-
     @artists = Artist.all.order(:name).limit(20).offset(page)
     render 'index.json.jbuilder'
     puts params[:page]

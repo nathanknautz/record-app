@@ -8,9 +8,10 @@
     height: 100%;
 }
 
-.nathan-list {
-  list-style-type: none;
+.nathan-li { 
+  cursor: pointer; 
 }
+
 .nathan-list-item {
   text-align: left;
   width: 200px;

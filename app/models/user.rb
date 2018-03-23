@@ -5,4 +5,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   has_many :user_records
   has_many :records, through: :user_records
+
+  def get_current_user
+    return current_user.id
+  end
 end
