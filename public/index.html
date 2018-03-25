@@ -344,8 +344,6 @@
         <div class="u-heading-v2-2--bottom g-brd-primary g-mb-30">
           <h2 class="text-uppercase u-heading-v2__title g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-40--md g-mb-0">Search Results</h2>
         </div>
-<!-- 
-        <p class="mb-0">Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante. Nunc ullamcorper, justo a iaculis elementum, enim orci viverra eros, fringilla porttitor lorem eros vel odio.</p> -->
       </div>
 
       <div class="container g-bg-gray-light-v5 g-font-size-13">
@@ -378,7 +376,7 @@
           <div class="d-md-table-cell g-valign-middle g-py-15 g-px-20">
             <h4 class="h6 text-uppercase g-font-weight-700">
               <!-- {{ result.name }} -->
-              <a class="g-color-gray-dark-v2" href="#!">{{ result.name }}</a>
+              <p class="g-color-gray-dark-v2" href="/#/">{{ result.name }}</p>
             </h4>
             <!-- {{ result.class }} -->
             <em class="g-font-style-normal">{{ result.class }}</em>
@@ -424,6 +422,49 @@
     </section>
 
 
+    <div class="d-flex justify-content-end align-items-center g-brd-bottom g-brd-gray-light-v4 g-pt-40 g-pb-20">
+      <!-- Show -->
+      <div class="g-mr-60">
+        <h2 class="h6 align-middle d-inline-block g-font-weight-400 text-uppercase g-pos-rel g-top-1 mb-0">Show:</h2>
+
+        <!-- Secondary Button -->
+        <div class="d-inline-block btn-group g-line-height-1_2">
+          <button type="button" class="btn btn-secondary dropdown-toggle h6 align-middle g-brd-none g-color-gray-dark-v5 g-color-black--hover g-bg-transparent text-uppercase g-font-weight-300 g-font-size-12 g-pa-0 g-pl-10 g-ma-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ limit }}
+          </button>
+          <div class="dropdown-menu rounded-0">
+            <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300 clickable-nk" v-on:click="setLimit(5)">5</a>
+            <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300 clickable-nk" v-on:click="setLimit(10)">10</a>
+            <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300 clickable-nk" v-on:click="setLimit(20)">20</a>
+            <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300 clickable-nk" v-on:click="setLimit(50)">50</a>
+          </div>
+        </div>
+        <!-- End Secondary Button -->
+      </div>
+      <!-- End Show -->
+
+      <!-- Sort By -->
+      <div class="g-mr-60">
+        <h2 class="h6 align-middle d-inline-block g-font-weight-400 text-uppercase g-pos-rel g-top-1 mb-0">Sort by:</h2>
+
+        <!-- Secondary Button -->
+        <div class="d-inline-block btn-group g-line-height-1_2">
+          <button v-if="sort == 1" type="button" class="btn btn-secondary dropdown-toggle h6 align-middle g-brd-none g-color-gray-dark-v5 g-color-black--hover g-bg-transparent text-uppercase g-font-weight-300 g-font-size-12 g-pa-0 g-pl-10 g-ma-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            A - Z
+          </button>
+          <button v-else type="button" class="btn btn-secondary dropdown-toggle h6 align-middle g-brd-none g-color-gray-dark-v5 g-color-black--hover g-bg-transparent text-uppercase g-font-weight-300 g-font-size-12 g-pa-0 g-pl-10 g-ma-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Z - A
+          </button>
+          <div class="dropdown-menu rounded-0">
+            <li class="dropdown-item g-color-gray-dark-v4 g-font-weight-300 clickable-nk" v-on:click="sortPage(1)">A - Z</li>
+            <li class="dropdown-item g-color-gray-dark-v4 g-font-weight-300 clickable-nk" v-on:click="sortPage(2)">Z - A</li>
+          </div>
+        </div>
+        <!-- End Secondary Button -->
+      </div>
+      <!-- End Sort By -->
+
+    </div>
 
     <!-- Products -->
     <div class="container">
@@ -445,39 +486,24 @@
                   <!-- Product Info -->
                   <div class="g-mb-30">
                     <h4 class="h5 g-color-black mb-0 mt-1">
-                      <a class="u-link-v5 g-color-black g-color-primary--hover" href="#!">
+                      <a class="u-link-v5 g-color-black g-color-primary--hover" v-bind:href="'/#/artists/' + artist.id">
                         {{ artist.name }}
                       </a>
                     </h4>
-                    <p v-if="artist.bio.length > 700"> {{ artist.bio.substring(0,700) }}... </p>
+                    <p v-if="artist.bio && artist.bio.length> 700"> {{ artist.bio.substring(0,700) }}... </p>
                     <p v-else> {{artist.bio}}  </p>
                   </div>
-                  <!-- End Product Info -->
-
-                  <!-- Products Icons -->
-         <!--          <ul class="list-inline g-mb-30">
-                    <li class="list-inline-item align-middle g-brd-right g-brd-gray-light-v4 g-pr-20 g-mr-20">
-                      <a class="d-inline-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover rounded-circle" href="#!">
-                        <i class="align-middle mr-1 icon-medical-022 u-line-icon-pro"></i>
-                        Add to Wishlist
-                      </a>
-                    </li>
-                    <li class="list-inline-item align-middle">
-                      <a class="d-inline-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover rounded-circle" href="#!">
-                        <i class="align-middle mr-1 icon-finance-149 u-line-icon-pro"></i>
-                        Add to Compare
-                      </a>
-                    </li>
-                  </ul> -->
-                  <!-- End Products Icons -->
 
                   <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-10 g-px-20" v-bind:href="'/#/artists/' + artist.id">
                     View Artist Page
                   </a>
+
                 </div>
+
               </div>
             </div>
-            <!-- End Products -->
+
+
 
 
 
@@ -487,9 +513,9 @@
                   <li class="page-item link">
                     <a class="page-link" v-on:click=prevPagination() tabindex="-1">Previous</a>
                   </li>
-                  <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 1)"> {{pages - 5}} </a></li>
-                  <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 2)"> {{pages - 4}} </a></li>
-                  <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 1)"> {{pages - 3}} </a></li>
+                  <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 5)"> {{pages - 5}} </a></li>
+                  <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 4)"> {{pages - 4}} </a></li>
+                  <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 3)"> {{pages - 3}} </a></li>
                   <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 2)"> {{pages - 2}} </a></li>
                   <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 1)"> {{pages - 1}} </a></li>
                   <li class="page-item"><a class="page-link" v-on:click="setPage(pages)"> {{pages}} </a></li>
@@ -509,131 +535,6 @@
 
   </div>
 </template>
-
-
-
-<template id="records-index-page">
-  <div class="vue-component">
-    
-    <section id="blog" class="u-bg-overlay g-bg-img-hero g-bg-black-opacity-0_6--after g-py-100" style="background-image: url(records.jpeg); height: 300px">
-    </section>
-      <section id="tours" class="g-bg-gray-light-v5 g-py-100" style="height:100px">
-      <div class="container text-center g-width-780 g-mb-65">
-        <div class="u-heading-v2-2--bottom g-brd-primary g-mb-30">
-          <h2 class="text-uppercase u-heading-v2__title g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-40--md g-mb-0">Records </h2>
-        </div>
-      </div>
-    </section>
-  
-
-
-    <!-- Products -->
-    <div class="container">
-      <div class="row">
-        <!-- Content -->
-        <div class="col-md-12 order-md-2">
-          <div class="g-pl-15--lg">
-
-            <!-- Products -->
-            <div v-for="record in records" class="g-brd-bottom g-brd-gray-light-v4">
-              <div class="row g-pt-30">
-                <div class="col-6 col-sm-5 col-lg-4 g-mb-30">
-                  <figure class="g-pos-rel">
-                    <img class="img-fluid" v-bind:src="record.image_url" alt="Image Description">
-                  </figure>
-                </div>
-
-                <div class="col-6 col-sm-7 col-lg-8 g-mb-15">
-                  <!-- Product Info -->
-                  <div class="g-mb-30">
-                    <h4 class="h5 g-color-black mb-0 mt-1">
-                      <a class="u-link-v5 g-color-black g-color-primary--hover" href="#!">
-                        {{ record.title }}
-                      </a>
-                      <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13 mb-2" href="#!">{{ record.release_year }}</a>
-                    </h4>
-                    <p>Genres: {{ record.pretty_genres }}</p>
-                  
-                  </div>
-                  <!-- End Product Info -->
-
-                  <!-- Products Icons -->
-                  <ul class="list-inline g-mb-30">
-                    <li class="list-inline-item align-middle">
-                      <a class="d-inline-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover rounded-circle" data-toggle="modal" data-target="#recordsPageAdd" v-on:click="setCurrentRecord(record)">
-                        <i class="align-middle mr-1 icon-finance-149 u-line-icon-pro" ></i>
-                        Add to Collection
-                      </a>
-                    </li>
-                  </ul>
-                  <!-- End Products Icons -->
-
-                  <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-10 g-px-20" v-bind:href="'/#/records/' + record.id">
-                    View Record Page
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="modal fade" id="recordsPageAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">{{ currentRecord.title }}</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div><img v-bind:src="currentRecord.image_url" style="width: 100%;" alt="">
-                      </div>
-                    <h5 class="mb-0" style="text-align: center;"> Released: {{currentRecord.release_year}} </h5>
-                    <input type="text" placeholder="Enter price of your album" v-model="price"> 
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="addToCollection('owned')">Add to collection</button>
-                    <button type="button" class="btn btn-warning" data-dismiss="modal" v-on:click="addToCollection('wish_list')">Add to wishlist</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Products -->
-
-
-
-            <!-- Pagination -->
-              <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                  <li class="page-item disabled">
-                    <a class="page-link" v-on:click=prevPagination() tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 2)"> {{pages - 5}} </a></li>
-                    <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 2)"> {{pages - 4}} </a></li>
-                    <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 2)"> {{pages - 3}} </a></li>
-                  </li>
-                  <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 2)"> {{pages - 2}} </a></li>
-                  <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 1)"> {{pages - 1}} </a></li>
-                  <li class="page-item"><a class="page-link" v-on:click="setPage(pages)"> {{pages}} </a></li>
-                  <li class="page-item">
-                    <a class="page-link" v-on:click="nextPagination()">Next</a>
-                  </li>
-                </ul>
-              </nav>
-            <!-- End Pagination -->
-          </div>
-        </div>
-        <!-- End Content -->
-
-      </div>
-    </div>
-
-
-  </div>
-</template>
-
-
-
-
 
 <template id="artists-show-page">
   <div class="vue-component">
@@ -726,6 +627,174 @@
 </template>
 
 
+
+<template id="records-index-page">
+  <div class="vue-component">
+    
+    <section id="blog" class="u-bg-overlay g-bg-img-hero g-bg-black-opacity-0_6--after g-py-100" style="background-image: url(records.jpeg); height: 300px">
+    </section>
+      <section id="tours" class="g-bg-gray-light-v5 g-py-100" style="height:100px">
+      <div class="container text-center g-width-780 g-mb-65">
+        <div class="u-heading-v2-2--bottom g-brd-primary g-mb-30">
+          <h2 class="text-uppercase u-heading-v2__title g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-40--md g-mb-0">Records </h2>
+        </div>
+      </div>
+    </section>
+  
+    <div class="d-flex justify-content-end align-items-center g-brd-bottom g-brd-gray-light-v4 g-pt-40 g-pb-20">
+      <!-- Show -->
+      <div class="g-mr-60">
+        <h2 class="h6 align-middle d-inline-block g-font-weight-400 text-uppercase g-pos-rel g-top-1 mb-0">Show:</h2>
+
+        <!-- Secondary Button -->
+        <div class="d-inline-block btn-group g-line-height-1_2">
+          <button type="button" class="btn btn-secondary dropdown-toggle h6 align-middle g-brd-none g-color-gray-dark-v5 g-color-black--hover g-bg-transparent text-uppercase g-font-weight-300 g-font-size-12 g-pa-0 g-pl-10 g-ma-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ limit }}
+          </button>
+          <div class="dropdown-menu rounded-0">
+            <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300 clickable-nk" v-on:click="setLimit(5)">5</a>
+            <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300 clickable-nk" v-on:click="setLimit(10)">10</a>
+            <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300 clickable-nk" v-on:click="setLimit(20)">20</a>
+            <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300 clickable-nk" v-on:click="setLimit(50)">50</a>
+          </div>
+        </div>
+        <!-- End Secondary Button -->
+      </div>
+      <!-- End Show -->
+
+      <!-- Sort By -->
+      <div class="g-mr-60">
+        <h2 class="h6 align-middle d-inline-block g-font-weight-400 text-uppercase g-pos-rel g-top-1 mb-0">Sort by:</h2>
+
+        <!-- Secondary Button -->
+        <div class="d-inline-block btn-group g-line-height-1_2">
+          <button v-if="sort == 1" type="button" class="btn btn-secondary dropdown-toggle h6 align-middle g-brd-none g-color-gray-dark-v5 g-color-black--hover g-bg-transparent text-uppercase g-font-weight-300 g-font-size-12 g-pa-0 g-pl-10 g-ma-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            A - Z
+          </button>
+          <button v-else type="button" class="btn btn-secondary dropdown-toggle h6 align-middle g-brd-none g-color-gray-dark-v5 g-color-black--hover g-bg-transparent text-uppercase g-font-weight-300 g-font-size-12 g-pa-0 g-pl-10 g-ma-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Z - A
+          </button>
+          <div class="dropdown-menu rounded-0">
+            <li class="dropdown-item g-color-gray-dark-v4 g-font-weight-300 clickable-nk" v-on:click="sortPage(1)">A - Z</li>
+            <li class="dropdown-item g-color-gray-dark-v4 g-font-weight-300 clickable-nk" v-on:click="sortPage(2)">Z - A</li>
+          </div>
+        </div>
+        <!-- End Secondary Button -->
+      </div>
+      <!-- End Sort By -->
+
+    </div>
+
+    <!-- Products -->
+    <div class="container">
+      <div class="row">
+        <!-- Content -->
+        <div class="col-md-12 order-md-2">
+          <div class="g-pl-15--lg">
+
+            <!-- Products -->
+            <div v-for="record in records" class="g-brd-bottom g-brd-gray-light-v4">
+              <div class="row g-pt-30">
+                <div class="col-6 col-sm-5 col-lg-4 g-mb-30">
+                  <figure class="g-pos-rel">
+                    <img class="img-fluid" v-bind:src="record.image_url" alt="Image Description">
+                  </figure>
+                </div>
+
+                <div class="col-6 col-sm-7 col-lg-8 g-mb-15">
+                  <!-- Product Info -->
+                  <div class="g-mb-30">
+                    <h4 class="h5 g-color-black mb-0 mt-1">
+                      <a class="u-link-v5 g-color-black g-color-primary--hover" v-bind:href="'/#/records/' + record.id">
+                        {{ record.title }}
+                      </a>
+                      <p class="d-inline-block g-color-gray-dark-v5 g-font-size-13 mb-2">{{ record.release_year }}</p>
+                    </h4>
+                    <p>Genres: {{ record.pretty_genres }}</p>
+                  
+                  </div>
+                  <!-- End Product Info -->
+
+                  <!-- Products Icons -->
+                  <ul class="list-inline g-mb-30">
+                    <li class="list-inline-item align-middle">
+                      <button class="d-inline-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover rounded-circle clickable-nk" data-toggle="modal" data-target="#recordsPageAdd" v-on:click="setCurrentRecord(record)">
+                        <i class="align-middle mr-1 icon-finance-149 u-line-icon-pro" ></i>
+                        Add to Collection
+                      </button>
+                    </li>
+                  </ul>
+                  <!-- End Products Icons -->
+
+                  <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-10 g-px-20" v-bind:href="'/#/records/' + record.id">
+                    View Record Page
+                  </a>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- NEED TO ADD ALERT HERE -->
+            <div class="modal fade" id="recordsPageAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">{{ currentRecord.title }}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div><img v-bind:src="currentRecord.image_url" style="width: 100%;" alt="">
+                      </div>
+                    <h5 class="mb-0" style="text-align: center;"> Released: {{currentRecord.release_year}} </h5>
+                    <input type="text" placeholder="Enter price of your album" v-model="price"> 
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="addToCollection('owned')">Add to collection</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" v-on:click="addToCollection('wish_list')">Add to wishlist</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Products -->
+
+
+
+            <!-- Pagination -->
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item disabled">
+                    <a class="page-link" v-on:click=prevPagination() tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 5)"> {{pages - 5}} </a></li>
+                    <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 4)"> {{pages - 4}} </a></li>
+                    <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 3)"> {{pages - 3}} </a></li>
+                  </li>
+                  <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 2)"> {{pages - 2}} </a></li>
+                  <li class="page-item"><a class="page-link" v-on:click="setPage(pages - 1)"> {{pages - 1}} </a></li>
+                  <li class="page-item"><a class="page-link" v-on:click="setPage(pages)"> {{pages}} </a></li>
+                  <li class="page-item">
+                    <a class="page-link" v-on:click="nextPagination()">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            <!-- End Pagination -->
+          </div>
+        </div>
+        <!-- End Content -->
+
+      </div>
+    </div>
+
+
+  </div>
+</template>
+
+
+
+
 <template id="records-show-page">
   <div class="vue-component">
     <section id="blog" class="u-bg-overlay g-bg-img-hero g-bg-black-opacity-0_6--after g-py-100" :style="{ backgroundImage: 'url(\'' + record.image_url + '\')' }">
@@ -777,7 +846,7 @@
               <div class="col-sm-7 g-px-0--sm">
                 <div class="u-info-v1-1 g-height-300 g-bg-white g-pa-20-30-0" style="overflow: scroll;">
                   <h3 class="h6 text-uppercase g-font-weight-700 g-mb-5">
-                    <a class="g-color-black g-color-primary--hover" href="#!">Track List</a>
+                    <p class="g-color-black g-color-primary--hover">Track List</p>
                   </h3>
                   <p v-for="track in record.pretty_tracklist" class="mb-0 g-color-black">{{ track }}</p>
                 </div>
@@ -974,7 +1043,7 @@
           <!-- Actions -->
           <div class="d-md-table-cell text-md-right g-valign-middle g-pa-20">
             <div class="g-mt-minus-10 g-mx-minus-5">
-              <button class="btn btn-xl btn-dark rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-on:click="selectRecord(index + 1)">Grab</button>
+     <!--          <button class="btn btn-xl btn-dark rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-on:click="selectRecord(index + 1)">Grab</button> -->
               <a class="btn btn-xl u-theme-btn-gray rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-on:click="removeRecord(record)">Remove</a>
               <a class="btn btn-xl u-btn-primary rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-bind:href="'/#/records/' + record.record_id">Details</a>
             </div>
@@ -983,7 +1052,7 @@
         </article>
         </div >
         <div style="display: flex; justify-content: center; margin: 30px">
-          <button class="btn btn-xl btn-dark rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-on:click="selectRecord(0)">Reset</button>
+<!--           <button class="btn btn-xl btn-dark rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-on:click="selectRecord(0)">Reset</button> -->
         </div>
       </div>
 <!--       <div id="highChart" style="min-width: 310px; height: 400px; margin: 50px"></div> -->
@@ -1150,7 +1219,7 @@
               <!-- End Form -->
 
               <footer class="text-center">
-                <p class="g-color-gray-dark-v5 g-font-size-13 mb-0">Don't have an account? <a class="g-font-weight-600" href="page-signup-2.html">signup</a>
+                <p class="g-color-gray-dark-v5 g-font-size-13 mb-0">Don't have an account? <a class="g-font-weight-600" href="/#/signup">signup</a>
                 </p>
               </footer>
             </div>
@@ -1207,7 +1276,7 @@
             <!-- End Form -->
 
             <footer class="text-center">
-              <p class="g-color-gray-dark-v5 g-font-size-13 mb-0">Already have an account? <a class="g-font-weight-600" href="page-signup3.html">signin</a>
+              <p class="g-color-gray-dark-v5 g-font-size-13 mb-0">Already have an account? <a class="g-font-weight-600" href="/#/login">signin</a>
               </p>
             </footer>
           </div>

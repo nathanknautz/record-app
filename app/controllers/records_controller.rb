@@ -1,14 +1,24 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show]
   def index
+    if params["limit"].to_i == 0
+      display_results = 20 
+    else
+      display_results = params["limit"].to_i
+    end
+
     if params["page"].to_i > 0
-      page =  (params["page"].to_i - 1) * 20
+      page =  (params["page"].to_i - 1) * display_results
     else
       page = 0
     end
-    @records = Record.all.order(:title).limit(20).offset(page)
+    sort = params["sort"].to_i 
+    if sort == 2
+      @records = Record.all.order(title: :desc).limit(display_results).offset(page)
+    else
+      @records = Record.all.order(:title).limit(display_results).offset(page)
+    end
     render 'index.json.jbuilder'
-    puts params[:page]
     
   end
 

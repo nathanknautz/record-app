@@ -34,9 +34,15 @@ var ArtistsIndexPage = {
   template: "#artists-index-page",
   data: function() {
     return { pages: 6,
-             artists: []
+             offset: 0,
+             artists: [],
+             sort: 1,
+             limit: 20
     };
   },
+  updated: function() {
+  },
+
   created: function() {
     axios.get("/artists/")
     .then(function(response) {
@@ -44,12 +50,30 @@ var ArtistsIndexPage = {
     }.bind(this));
   },
   methods: {
-    setPage: function(page) {
-      var number = page;
-      axios.get("/artists/?page=" + number)
+    setLimit: function(num) {
+      this.limit = num;
+      axios.get("/artists/?page=" + this.offset + "&sort=" + this.sort + "&limit=" + this.limit)
       .then(function(response) {
         this.artists = response.data;
       }.bind(this));
+      document.documentElement.scrollTop = 200;
+
+    },
+    sortPage: function(type) {
+      this.sort = type;
+      axios.get("/artists/?page=" + this.offset + "&sort=" + this.sort + "&limit=" + this.limit)
+      .then(function(response) {
+        this.artists = response.data;
+      }.bind(this));
+      document.documentElement.scrollTop = 200;
+    },
+    setPage: function(page) {
+      this.offset = page;
+      axios.get("/artists/?page=" + this.offset + "&sort=" + this.sort + "&limit=" + this.limit)
+      .then(function(response) {
+        this.artists = response.data;
+      }.bind(this));
+      document.documentElement.scrollTop = 200;
     },
     nextPagination: function() {
       this.pages = this.pages + 6;
@@ -115,9 +139,12 @@ var RecordsIndexPage = {
   template: "#records-index-page",
   data: function() {
     return { pages: 6,
+             offset: 0,
              records: [],
              currentRecord: {},
              price: "",
+             sort: 1,
+             limit: 20
     };
   },
   created: function() {
@@ -127,12 +154,30 @@ var RecordsIndexPage = {
     }.bind(this));
   },
   methods: {
-    setPage: function(page) {
-      var number = page;
-      axios.get("/records/?page=" + number)
+    setLimit: function(num) {
+      this.limit = num;
+      axios.get("/records/?page=" + this.offset + "&sort=" + this.sort + "&limit=" + this.limit)
       .then(function(response) {
         this.records = response.data;
       }.bind(this));
+      document.documentElement.scrollTop = 200;
+
+    },
+    sortPage: function(type) {
+      this.sort = type;
+      axios.get("/records/?page=" + this.offset + "&sort=" + this.sort + "&limit=" + this.limit)
+      .then(function(response) {
+        this.records = response.data;
+      }.bind(this));
+      document.documentElement.scrollTop = 200;
+    },
+    setPage: function(page) {
+      this.offset = page;
+      axios.get("/records/?page=" + this.offset + "&sort=" + this.sort + "&limit=" + this.limit)
+      .then(function(response) {
+        this.records = response.data;
+      }.bind(this));
+      document.documentElement.scrollTop = 200;
     },
     nextPagination: function() {
       this.pages = this.pages + 6;
@@ -426,9 +471,13 @@ var UsersShowPage = {
       } else {
         index = 'zero'
       }
-      var params = { record: index }
-      axios
-      .post("https://api.particle.io/v1/devices/2c003b001047363333343437/record?access_token=b74b4f7675873bc39b4fa7477f51f15dfab7007e", params);
+
+      var params = { arg: "one" }
+      axios.post("https://api.particle.io/v1/devices/2c003b001047363333343437/recordSelect?access_token=0eaf7f1ca7393529688d8d6d5a12eefbb3671a2e", {arg: "one"})
+      .catch(function(error) {
+        console.log(error)
+      })
+      // .post("https://api.particle.io/v1/devices/2c003b001047363333343437/recordSelect", params);
 
     },
     removeRecord: function(record) {

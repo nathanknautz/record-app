@@ -1,18 +1,23 @@
 class ArtistsController < ApplicationController
   def index
-    # page = 0
-    # puts params["page"]
-    # if params["page"].to_i > 1
-    #  page = params["page"].to_i * 20
-    # end
+    if params["limit"].to_i == 0
+      display_results = 20 
+    else
+      display_results = params["limit"].to_i
+    end
+
     if params["page"].to_i > 0
-      page = (params["page"].to_i - 1) * 20
+      page = (params["page"].to_i - 1) * display_results
     else 
       page = 0
     end
-    @artists = Artist.all.order(:name).limit(20).offset(page)
+    sort = params["sort"].to_i 
+    if sort == 2
+      @artists = Artist.all.order(name: :desc).limit(display_results).offset(page)
+    else
+      @artists = Artist.all.order(:name).limit(display_results).offset(page)
+    end
     render 'index.json.jbuilder'
-    puts params[:page]
   end
 
   def show
