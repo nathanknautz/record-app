@@ -13,6 +13,7 @@
 
     <!-- Google Fonts -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans%3A300%2C400%2C500%2C600%2C700%2C800%7CPlayfair+Display%7CRoboto%7CRaleway%7CSpectral%7CRubik">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="/assets/vendor/bootstrap/bootstrap.min.css">
@@ -73,8 +74,8 @@
              data-header-fix-moment-classes="u-shadow-v27">
         <nav class="navbar navbar-expand-lg p-0 g-px-15" style="height: 40px">
           <div class="container g-pos-rel">
-            <h4 class="g-color-white">
-              Digital Records
+            <h4 v-if="firstName" class="g-color-white">
+              <span><img v-bind:src="imageUrl" alt="" style="height: 40px;width: 40px; border-radius: 50%;"></span>  {{ firstName }} 
             </h4>
 
             <div class="collapse navbar-collapse align-items-center flex-sm-row" id="navBar">
@@ -734,13 +735,13 @@
             </div>
 
 
-            <!-- NEED TO ADD ALERT HERE -->
+            <!-- NEED TO ADD ALERT -->
             <div class="modal fade" id="recordsPageAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLabel">{{ currentRecord.title }}</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button v-on:click="setAdded()" type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
@@ -750,10 +751,17 @@
                     <h5 class="mb-0" style="text-align: center;"> Released: {{currentRecord.release_year}} </h5>
                     <input type="text" placeholder="Enter price of your album" v-model="price"> 
                   </div>
+                  <div v-if="error" class="alert alert-danger fade show" role="alert">
+                    <strong>Woah there!</strong> You must be logged in to add an album to your collection.
+                  </div>
+
+                  <div v-if="added === true" class="alert alert-info fade show" role="alert">
+                    <strong>Album added to collection!</strong> 
+                  </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="addToCollection('owned')">Add to collection</button>
-                    <button type="button" class="btn btn-warning" data-dismiss="modal" v-on:click="addToCollection('wish_list')">Add to wishlist</button>
+                    <button v-on:click="setAdded()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary"v-on:click="addToCollection('owned')">Add to collection</button>
+                    <button type="button" class="btn btn-warning" v-on:click="addToCollection('wish_list')">Add to wishlist</button>
                   </div>
                 </div>
               </div>
@@ -939,7 +947,7 @@
 
               <!-- Article Image -->
               <a  class="d-md-table-cell g-valign-middle g-width-130">
-                <img class="d-block info-v5-2__image g-ml-minus-1" src="http://www.butterflyfields.com/wp-content/uploads/2017/06/abstract-user-flat-3.svg">
+                <img class="d-block info-v5-2__image g-ml-minus-1" v-bind:src="user.image_url">
               </a>
 
               <!-- End Article Image -->
@@ -1260,6 +1268,10 @@
 
               <div class="mb-4">
                 <input v-model="signupEmail" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" type="email" placeholder="Email">
+              </div>
+
+              <div class="mb-4">
+                <input v-model="imageUrl" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" type="text" placeholder="Account Image Url">
               </div>
 
               <div class="row">

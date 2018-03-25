@@ -12,9 +12,15 @@ class UsersController < ApplicationController
 
   end
   def create
+    if params[:image_url] == ""
+      image = "http://www.butterflyfields.com/wp-content/uploads/2017/06/abstract-user-flat-3.svg"
+    else 
+      image = params[:image_url]
+    end
     user = User.new(first_name: params[:first_name],
                     last_name: params[:last_name],
                     email: params[:email],
+                    image_url: image,
                     password: params[:password],
                     password_confirmation: params[:password_confirmation]
                     )

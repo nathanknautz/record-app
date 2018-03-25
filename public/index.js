@@ -2,11 +2,12 @@
 var HomePage = {
   template: "#home-page",
   data: function() {
-    return {
+    return { firstName: ""
       
     };
   },
-  created: function() {},
+  created: function() {
+  },
   methods: {},
   computed: {}
 };
@@ -144,7 +145,9 @@ var RecordsIndexPage = {
              currentRecord: {},
              price: "",
              sort: 1,
-             limit: 20
+             limit: 20,
+             error: "",
+             added: false
     };
   },
   created: function() {
@@ -154,6 +157,9 @@ var RecordsIndexPage = {
     }.bind(this));
   },
   methods: {
+    setAdded: function() {
+      this.added = false;
+    },
     setLimit: function(num) {
       this.limit = num;
       axios.get("/records/?page=" + this.offset + "&sort=" + this.sort + "&limit=" + this.limit)
@@ -200,7 +206,11 @@ var RecordsIndexPage = {
       axios
       .post("/user_records", params)
       .then(function() {
-      }.bind(this));
+        this.added = true;
+      }.bind(this))
+      .catch(function(error) {
+          this.error = error;
+        }.bind(this));
     },
   },
   computed: {}
@@ -546,7 +556,8 @@ var SignupPage = {
               signupPasswordConfirmation: "",
               signupFirstName: "",
               signupLastName: "",
-              signupErrors: []
+              signupErrors: [],
+              imageUrl: ""
     };
   },
   created: function() {},
@@ -557,7 +568,8 @@ var SignupPage = {
       last_name: this.signupLastName,  
       email: this.signupEmail,
       password: this.signupPassword,
-      password_confirmation: this.signupPasswordConfirmation
+      password_confirmation: this.signupPasswordConfirmation,
+      image_url: this.imageUrl
       };
       axios
       .post("/users", params)
@@ -606,7 +618,9 @@ var app = new Vue({
     return {term: "",
             results: [],
             userId: "",
-            errors: ""
+            errors: "",
+            firstName: "",
+            imageUrl: ""
           }
   },
   created: function() {
@@ -614,6 +628,14 @@ var app = new Vue({
     if (jwt) {
       axios.defaults.headers.common["Authorization"] = jwt;
     }
+    axios.get("/users/1").then(function(response) {
+      var userId = response.data.current_user_id
+      axios.get("/users/" + userId).then(function(response) {
+        console.log(response.data)
+        this.firstName = response.data.first_name;
+        this.imageUrl = response.data.image_url;
+      }.bind(this))
+    }.bind(this))
 
   },
   methods: {
