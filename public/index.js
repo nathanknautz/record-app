@@ -479,15 +479,19 @@ var UsersShowPage = {
       } else if (index == 5) {
         index = 'five'
       } else {
-        index = 'zero'
+        index = 'reset'
       }
 
-      var params = { arg: "one" }
-      axios.post("https://api.particle.io/v1/devices/2c003b001047363333343437/recordSelect?access_token=0eaf7f1ca7393529688d8d6d5a12eefbb3671a2e", {arg: "one"})
-      .catch(function(error) {
-        console.log(error)
+
+      axios({
+        method:'post',
+        url:"https://api.particle.io/v1/devices/2c003b001047363333343437/recordSelect",
+        headers: { 'Authorization': 'Bearer 251ff1fdaa594d364536f2c22c60f15e62a2091a' },
+        data: { arg: index }
       })
-      // .post("https://api.particle.io/v1/devices/2c003b001047363333343437/recordSelect", params);
+        .then(function(response) {
+          console.log(response.data)
+      });
 
     },
     removeRecord: function(record) {

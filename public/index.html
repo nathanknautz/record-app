@@ -1054,16 +1054,16 @@
      <!--          <button class="btn btn-xl btn-dark rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-on:click="selectRecord(index + 1)">Grab</button> -->
               <a class="btn btn-xl u-theme-btn-gray rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-on:click="removeRecord(record)">Remove</a>
               <a class="btn btn-xl u-btn-primary rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-bind:href="'/#/records/' + record.record_id">Details</a>
+              <button class="btn btn-xl u-btn-black rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-on:click="selectRecord(index)">Grab</button>
             </div>
           </div>
           <!-- End Actions -->
         </article>
         </div >
         <div style="display: flex; justify-content: center; margin: 30px">
-<!--           <button class="btn btn-xl btn-dark rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-on:click="selectRecord(0)">Reset</button> -->
+          <button class="btn btn-xl u-btn-black rounded-0 text-uppercase g-font-weight-700 g-font-size-12 g-mx-5 g-mt-10" v-on:click="selectRecord(0)">Reset</button>
         </div>
       </div>
-<!--       <div id="highChart" style="min-width: 310px; height: 400px; margin: 50px"></div> -->
       </section>
 
         <section v-if="currentUserId == userId" id="events" class="u-bg-overlay g-bg-img-hero g-bg-attachment-fixed g-bg-black-opacity-0_6--after g-py-100" style="background-image: url(decades.jpg);">
