@@ -549,7 +549,8 @@
               <div class="u-heading-v4-1 g-max-width-645 g-brd-7 g-brd-primary py-0 g-pl-30">
                 <h2 class="u-heading-v4__title text-uppercase g-line-height-1 g-font-weight-700 g-font-size-30 g-font-size-65--md g-color-white g-mb-15">{{ artist.name }}</h2>
                 <div class="g-pos-rel g-bottom-minus-5">
-                  <p class="mb-0">{{ artist.bio }}</p>
+                  <p v-if="artist.bio.length > 1000" class="mb-0">{{ artist.bio.substring(0,900) }}...</p>
+                  <p  v-else class="mb-0">{{ artist.bio}}</p>
                 </div>
 
               </div>

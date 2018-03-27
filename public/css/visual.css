@@ -21,6 +21,7 @@
     height: 600px;
     position: relative;
     overflow: hidden;
+    background-image: url(../headphones.jpeg);
 }
 .coverflow {
     width: 600px;
